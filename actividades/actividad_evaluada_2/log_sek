@@ -1,0 +1,159 @@
+
+
+>>> to server
+GET / HTTP/1.1
+Host: localhost:1823
+Connection: keep-alive
+sec-ch-ua: "Not/A)Brand";v="8", "Chromium";v="126", "Opera GX";v="112"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+DNT: 1
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 OPR/112.0.0.0
+Sec-Purpose: prefetch;prerender
+Purpose: prefetch
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-US,en;q=0.9
+
+
+
+<<< from server
+HTTP/1.1 200 OK
+Connection: Keep-Alive
+Keep-Alive: timeout=5, max=100
+content-type: text/html
+last-modified: Sat, 10 Oct 2020 19:37:25 GMT
+accept-ranges: bytes
+content-length: 163
+date: Mon, 26 Aug 2024 23:01:08 GMT
+
+<html><head><META HTTP-EQUIV="Cache-control" CONTENT="no-cache"><META HTTP-EQUIV="refresh" CONTENT="0;URL=/cgi-sys/defaultwebpage.cgi"></head><body></body></html>
+
+
+>>> to server
+GET /cgi-sys/defaultwebpage.cgi HTTP/1.1
+Host: localhost:1823
+Connection: keep-alive
+sec-ch-ua: "Not/A)Brand";v="8", "Chromium";v="126", "Opera GX";v="112"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+DNT: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 OPR/112.0.0.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Dest: document
+Referer: http://localhost:1823/
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-US,en;q=0.9
+
+
+
+>>> to server
+GET /cgi-sys/defaultwebpage.cgi HTTP/1.1
+Host: localhost:1823
+Connection: keep-alive
+sec-ch-ua: "Not/A)Brand";v="8", "Chromium";v="126", "Opera GX";v="112"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+DNT: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 OPR/112.0.0.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Dest: document
+Referer: http://localhost:1823/
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-US,en;q=0.9
+
+
+
+>>> to server
+GET /cgi-sys/defaultwebpage.cgi HTTP/1.1
+Host: localhost:1823
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: "Not/A)Brand";v="8", "Chromium";v="126", "Opera GX";v="112"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+DNT: 1
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 OPR/112.0.0.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Dest: document
+Referer: http://localhost:1823/
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-US,en;q=0.9
+
+
+
+>>> to server
+GET /cgi-sys/defaultwebpage.cgi HTTP/1.1
+Host: localhost:1823
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: "Not/A)Brand";v="8", "Chromium";v="126", "Opera GX";v="112"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+DNT: 1
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 OPR/112.0.0.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Dest: document
+Referer: http://localhost:1823/
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-US,en;q=0.9
+
+
+
+>>> to server
+GET /cgi-sys/defaultwebpage.cgi HTTP/1.1
+Host: localhost:1823
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: "Not/A)Brand";v="8", "Chromium";v="126", "Opera GX";v="112"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+DNT: 1
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 OPR/112.0.0.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Dest: document
+Referer: http://localhost:1823/
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-US,en;q=0.9
+
+
+
+>>> to server
+GET /cgi-sys/defaultwebpage.cgi HTTP/1.1
+Host: localhost:1823
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: "Not/A)Brand";v="8", "Chromium";v="126", "Opera GX";v="112"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+DNT: 1
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 OPR/112.0.0.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Dest: document
+Referer: http://localhost:1823/
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-US,en;q=0.9
+

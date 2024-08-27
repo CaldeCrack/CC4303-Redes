@@ -1,0 +1,14 @@
+- Actividad evaluada 2
+Estudiante: Andrés Calderón Guardia
+
+Se ejecutó el proxy con las 5 páginas mencionadas de las cuales se obtuvieron los siguientes resultados:
+- www.umag.cl: Esta página cargó sin problemas y lo que se escribe en el log se corresponde con la página que se muestra en el navegador, siendo esta la de la Universidad de Magallanes.
+
+- www.sek.cl: Esta página no cargó en el browser de modo que ni siquiera mostró la página de error en inglés que se menciona, y por ello el log solo muestra como intenta conectarse a la página múltiples veces pero nunca recibe información de vuelta.
+
+- serviciopais.cl: El log muestra que intentó acceder a la página mediante http y esto generó un error 302, con el cual se nos redirigió en el browser a la misma pero utilizando el protocolo https.
+
+- dcc.uchile.cl: Similar a como ocurrió en la página anterior el log muestra que se obtuvo un error 301, a lo cual en el navegador se redirige nuevamente a la misma página pero usando https.
+
+- www.colina.cl: Aquí se mostró en el browser una página de error como se esperaba y en el log se registró la misma información visualizada en esta.
+

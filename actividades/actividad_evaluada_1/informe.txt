@@ -1,0 +1,13 @@
+- Actividad evaluada 1
+Estudiante: Andrés Calderón Guardia
+
+La experimentación se realizó en Windows mediante WSL2, en particular con la distribución de Ubuntu versión 24.04.
+
+Primero mediante Python se creó un archivo que contenía 500.000 carácteres, todos siendo una 'a', para crear un archivo de exactamente 500 KB, y se intentó enviar este mediante el cliente, pero tras varios intentos nunca se logró que el archivo salida.txt tuviese contenido (estaba vacío). Una posible explicación sería que dado que el archivo es de una sola línea y esta contiene los 500 KB por completo entonces es de una muy alta probabilidad que no logre enviar el paquete.
+
+Dado el análisis anterior se creó un segundo archivo el cual contenía también 500.000 carácteres pero la diferencia es que estos eran 'b\n', de modo que se generaban 250.000 líneas con la letra b. Al enviar esto mediante el cliente, en el archivo de salida.txt si se guardaba correctamente la información, con la única diferencia de que el resultante poseía un tamaño ligeramente menor al de 500 KB. Esto puede deberse al uso del protocolo udp, el cual puede perder paquetes durante el envío de estos.
+
+Finalmente se realizó el mismo experimento pero mandando los paquetes en paralelo, para ello se utilizó el comando entregado y adicionalmente un ampersand (&) seguido del mismo comando para ejecutar ambos efectivamente en paralelo. En este caso se evidenció nuevamente que el archivo resultante también es de un tamaño menor al original, pero en contraste ahora la diferencia fue notablemente mayor, siendo el tamaño resultante de alrededor del 60% del original.
+
+Una posible explicación para esta diferencia es que estén sobreescribiendo varias líneas del archivo de salida mutuamente en varias ocasiones, y como consecuencia esto ocasiona la reducción del tamaño del archivo final.
+
