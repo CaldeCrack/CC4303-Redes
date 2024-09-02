@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 # Echo client program
-# Version con dos threads: uno lee de stdin hacia el socket y el otro al revés
 import jsockets, sys, threading, time
 
 def Rdr(s, size):
@@ -36,5 +35,6 @@ while True:
 		break
 	s.send(byte_s)
 
+newthread.join()
 time.sleep(3)
 s.close()
