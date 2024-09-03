@@ -13,11 +13,9 @@ class ClientThread(threading.Thread):
         print('Cliente Conectado')
  
         while True:
-            data = self.sock.recv(1024)
+            data = self.sock.recv(1024*1024)
             if not data: break
-            print('serv read')
             self.sock.send(data)
-            print('serv write')
         self.sock.close()
         print('Cliente desconectado')
 

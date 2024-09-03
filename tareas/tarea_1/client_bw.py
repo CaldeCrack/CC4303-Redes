@@ -22,12 +22,10 @@ if s is None:
 	print('Could not open socket')
 	sys.exit(1)
 
-# Creo thread que lee desde el socket hacia stdout:
 size: int = int(sys.argv[1])
 newthread = threading.Thread(target=Rdr, args=(s, size))
 newthread.start()
 
-# En este otro thread leo desde stdin hacia socket:
 while True:
 	byte_s = sys.stdin.buffer.read(size)
 	if not byte_s:

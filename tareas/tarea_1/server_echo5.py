@@ -26,7 +26,7 @@ while inputs:
             print(f'Cliente conectado desde {addr}')
             inputs.append(conn)
         else: # leo datos del socket
-            data = s.recv(1024)
+            data = s.recv(1024*1024)
             if not data: # EOF, cliente se desconectó
                 print('Cliente desconectado')
                 inputs.remove(s)

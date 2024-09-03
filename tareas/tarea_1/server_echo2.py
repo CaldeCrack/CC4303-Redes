@@ -11,7 +11,7 @@ def childdeath(signum, frame):
 def server(conn):
     print('Cliente conectado')
     while True:
-        data = conn.recv(1024)
+        data = conn.recv(1024*1024)
         if not data: break
         conn.send(data)
     conn.close()
