@@ -2,12 +2,11 @@
 import sys, os
 
 def main(file_size: int, file_amount: int):
-	# # Delete files in folder
-	# path = os.path.dirname(os.path.abspath(__file__))
-	# path += "/files"
-	# folder = os.listdir(path)
-	# for f in folder:
-	# 	os.remove(f"{path}/{f}")
+	# Create folder if not exists
+	path = os.path.dirname(os.path.abspath(__file__))
+	folder: str = f"{path}/files"
+	if not os.path.exists(folder):
+		os.makedirs(folder)
 
 	# Create files
 	size_bytes = file_size * 1024 * 1024
