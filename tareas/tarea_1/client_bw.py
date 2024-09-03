@@ -31,10 +31,9 @@ newthread.start()
 while True:
 	byte_s = sys.stdin.buffer.read(size)
 	if not byte_s:
-		s.shutdown(jsockets.socket.SHUT_WR)
+		s.shutdown(jsockets.socket.SHUT_WR) # sin esta línea no terminaba de ejecutarse el código
 		break
 	s.send(byte_s)
 
 newthread.join()
-time.sleep(3)
 s.close()
