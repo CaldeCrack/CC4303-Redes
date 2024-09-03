@@ -562,3 +562,4 @@ FodyWeavers.xsd
 *.sln.iml
 
 files
+result.bin
