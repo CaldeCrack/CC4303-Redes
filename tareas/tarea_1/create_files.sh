@@ -1,10 +1,10 @@
-#!/bin/bash
+#!/bin/sh
 
 # Crear 3 archivos grandes
-./create_file.py 500 3
+./create_files.py 500 3
 
 # Crear 20 archivos medianos
-./create_file.py 75 20
+./create_files.py 75 20
 
 # Crear 100 archivos pequeños
-./create_file.py 15 100
+./create_files.py 15 100

@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # Echo client program
-import jsockets, sys, threading, time
+import jsockets, sys, threading
 
 def Rdr(s, size):
 	global total_size
