@@ -31,24 +31,27 @@ do
 	for i in {0..2}
 	do
 		echo -n -e "Archivo: ${folder_path}/archivo_500_${i}.bin\nTiempo: " >> time.txt
-		{ time ./client_bw.py ${size} localhost 1818 < files/archivo_500_${i}.bin > result.bin ; } 2>&1 | grep real | cut -f 2 >> time.txt
+		{ time ./client_bw.py ${size} localhost 1818 < files/archivo_500_${i}.bin > result.bin ; } 2>&1 | grep real | cut -f 2 >> time.txt &
 	done
+	wait
 
 	echo "Generando tiempo de 20 archivos medianos en paralelo"
 	echo -e "\n- 20 archivos medianos" >> time.txt
 	for i in {0..19}
 	do
 		echo -n -e "Archivo: ${folder_path}/archivo_75_${i}.bin\nTiempo: " >> time.txt
-		{ time ./client_bw.py ${size} localhost 1818 < files/archivo_75_${i}.bin > result.bin ; } 2>&1 | grep real | cut -f 2 >> time.txt
+		{ time ./client_bw.py ${size} localhost 1818 < files/archivo_75_${i}.bin > result.bin ; } 2>&1 | grep real | cut -f 2 >> time.txt &
 	done
+	wait
 
 	echo "Generando tiempo de 100 archivos pequeños en paralelo"
 	echo -e "\n- 100 archivos pequeños" >> time.txt
 	for i in {0..99}
 	do
 		echo -n -e "Archivo: ${folder_path}/archivo_15_${i}.bin\nTiempo: " >> time.txt
-		{ time ./client_bw.py ${size} localhost 1818 < files/archivo_15_${i}.bin > result.bin ; } 2>&1 | grep real | cut -f 2 >> time.txt
+		{ time ./client_bw.py ${size} localhost 1818 < files/archivo_15_${i}.bin > result.bin ; } 2>&1 | grep real | cut -f 2 >> time.txt &
 	done
+	wait
 done
 
 echo ""

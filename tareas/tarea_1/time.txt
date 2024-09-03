@@ -1,0 +1,774 @@
+
+----- size:128 -----
+
+- 1 archivo grande
+Archivo: ./files/archivo_500_0.bin
+Tiempo: 0m21.516s
+
+- 3 archivos grandes
+Archivo: ./files/archivo_500_0.bin
+Tiempo: Archivo: ./files/archivo_500_1.bin
+Tiempo: Archivo: ./files/archivo_500_2.bin
+Tiempo: 0m40.148s
+0m40.182s
+1m13.389s
+
+- 20 archivos medianos
+Archivo: ./files/archivo_75_0.bin
+Tiempo: Archivo: ./files/archivo_75_1.bin
+Tiempo: Archivo: ./files/archivo_75_2.bin
+Tiempo: Archivo: ./files/archivo_75_3.bin
+Tiempo: Archivo: ./files/archivo_75_4.bin
+Tiempo: Archivo: ./files/archivo_75_5.bin
+Tiempo: Archivo: ./files/archivo_75_6.bin
+Tiempo: Archivo: ./files/archivo_75_7.bin
+Tiempo: Archivo: ./files/archivo_75_8.bin
+Tiempo: Archivo: ./files/archivo_75_9.bin
+Tiempo: Archivo: ./files/archivo_75_10.bin
+Tiempo: Archivo: ./files/archivo_75_11.bin
+Tiempo: Archivo: ./files/archivo_75_12.bin
+Tiempo: Archivo: ./files/archivo_75_13.bin
+Tiempo: Archivo: ./files/archivo_75_14.bin
+Tiempo: Archivo: ./files/archivo_75_15.bin
+Tiempo: Archivo: ./files/archivo_75_16.bin
+Tiempo: Archivo: ./files/archivo_75_17.bin
+Tiempo: Archivo: ./files/archivo_75_18.bin
+Tiempo: Archivo: ./files/archivo_75_19.bin
+Tiempo: 0m43.415s
+0m43.427s
+0m43.481s
+0m43.520s
+0m43.483s
+0m43.582s
+0m43.560s
+0m43.601s
+0m43.729s
+0m43.634s
+0m43.638s
+0m43.745s
+0m43.795s
+0m43.843s
+0m43.789s
+0m43.778s
+0m43.844s
+0m43.836s
+0m43.864s
+0m44.025s
+
+- 100 archivos pequeños
+Archivo: ./files/archivo_15_0.bin
+Tiempo: Archivo: ./files/archivo_15_1.bin
+Tiempo: Archivo: ./files/archivo_15_2.bin
+Tiempo: Archivo: ./files/archivo_15_3.bin
+Tiempo: Archivo: ./files/archivo_15_4.bin
+Tiempo: Archivo: ./files/archivo_15_5.bin
+Tiempo: Archivo: ./files/archivo_15_6.bin
+Tiempo: Archivo: ./files/archivo_15_7.bin
+Tiempo: Archivo: ./files/archivo_15_8.bin
+Tiempo: Archivo: ./files/archivo_15_9.bin
+Tiempo: Archivo: ./files/archivo_15_10.bin
+Tiempo: Archivo: ./files/archivo_15_11.bin
+Tiempo: Archivo: ./files/archivo_15_12.bin
+Tiempo: Archivo: ./files/archivo_15_13.bin
+Tiempo: Archivo: ./files/archivo_15_14.bin
+Tiempo: Archivo: ./files/archivo_15_15.bin
+Tiempo: Archivo: ./files/archivo_15_16.bin
+Tiempo: Archivo: ./files/archivo_15_17.bin
+Tiempo: Archivo: ./files/archivo_15_18.bin
+Tiempo: Archivo: ./files/archivo_15_19.bin
+Tiempo: Archivo: ./files/archivo_15_20.bin
+Tiempo: Archivo: ./files/archivo_15_21.bin
+Tiempo: Archivo: ./files/archivo_15_22.bin
+Tiempo: Archivo: ./files/archivo_15_23.bin
+Tiempo: Archivo: ./files/archivo_15_24.bin
+Tiempo: Archivo: ./files/archivo_15_25.bin
+Tiempo: Archivo: ./files/archivo_15_26.bin
+Tiempo: Archivo: ./files/archivo_15_27.bin
+Tiempo: Archivo: ./files/archivo_15_28.bin
+Tiempo: Archivo: ./files/archivo_15_29.bin
+Tiempo: Archivo: ./files/archivo_15_30.bin
+Tiempo: Archivo: ./files/archivo_15_31.bin
+Tiempo: Archivo: ./files/archivo_15_32.bin
+Tiempo: Archivo: ./files/archivo_15_33.bin
+Tiempo: Archivo: ./files/archivo_15_34.bin
+Tiempo: Archivo: ./files/archivo_15_35.bin
+Tiempo: Archivo: ./files/archivo_15_36.bin
+Tiempo: Archivo: ./files/archivo_15_37.bin
+Tiempo: Archivo: ./files/archivo_15_38.bin
+Tiempo: Archivo: ./files/archivo_15_39.bin
+Tiempo: Archivo: ./files/archivo_15_40.bin
+Tiempo: Archivo: ./files/archivo_15_41.bin
+Tiempo: Archivo: ./files/archivo_15_42.bin
+Tiempo: Archivo: ./files/archivo_15_43.bin
+Tiempo: Archivo: ./files/archivo_15_44.bin
+Tiempo: Archivo: ./files/archivo_15_45.bin
+Tiempo: Archivo: ./files/archivo_15_46.bin
+Tiempo: Archivo: ./files/archivo_15_47.bin
+Tiempo: Archivo: ./files/archivo_15_48.bin
+Tiempo: Archivo: ./files/archivo_15_49.bin
+Tiempo: Archivo: ./files/archivo_15_50.bin
+Tiempo: Archivo: ./files/archivo_15_51.bin
+Tiempo: Archivo: ./files/archivo_15_52.bin
+Tiempo: Archivo: ./files/archivo_15_53.bin
+Tiempo: Archivo: ./files/archivo_15_54.bin
+Tiempo: Archivo: ./files/archivo_15_55.bin
+Tiempo: Archivo: ./files/archivo_15_56.bin
+Tiempo: Archivo: ./files/archivo_15_57.bin
+Tiempo: Archivo: ./files/archivo_15_58.bin
+Tiempo: Archivo: ./files/archivo_15_59.bin
+Tiempo: Archivo: ./files/archivo_15_60.bin
+Tiempo: Archivo: ./files/archivo_15_61.bin
+Tiempo: Archivo: ./files/archivo_15_62.bin
+Tiempo: Archivo: ./files/archivo_15_63.bin
+Tiempo: Archivo: ./files/archivo_15_64.bin
+Tiempo: Archivo: ./files/archivo_15_65.bin
+Tiempo: Archivo: ./files/archivo_15_66.bin
+Tiempo: Archivo: ./files/archivo_15_67.bin
+Tiempo: Archivo: ./files/archivo_15_68.bin
+Tiempo: Archivo: ./files/archivo_15_69.bin
+Tiempo: Archivo: ./files/archivo_15_70.bin
+Tiempo: Archivo: ./files/archivo_15_71.bin
+Tiempo: Archivo: ./files/archivo_15_72.bin
+Tiempo: Archivo: ./files/archivo_15_73.bin
+Tiempo: Archivo: ./files/archivo_15_74.bin
+Tiempo: Archivo: ./files/archivo_15_75.bin
+Tiempo: Archivo: ./files/archivo_15_76.bin
+Tiempo: Archivo: ./files/archivo_15_77.bin
+Tiempo: Archivo: ./files/archivo_15_78.bin
+Tiempo: Archivo: ./files/archivo_15_79.bin
+Tiempo: Archivo: ./files/archivo_15_80.bin
+Tiempo: Archivo: ./files/archivo_15_81.bin
+Tiempo: Archivo: ./files/archivo_15_82.bin
+Tiempo: Archivo: ./files/archivo_15_83.bin
+Tiempo: Archivo: ./files/archivo_15_84.bin
+Tiempo: Archivo: ./files/archivo_15_85.bin
+Tiempo: Archivo: ./files/archivo_15_86.bin
+Tiempo: Archivo: ./files/archivo_15_87.bin
+Tiempo: Archivo: ./files/archivo_15_88.bin
+Tiempo: Archivo: ./files/archivo_15_89.bin
+Tiempo: Archivo: ./files/archivo_15_90.bin
+Tiempo: Archivo: ./files/archivo_15_91.bin
+Tiempo: Archivo: ./files/archivo_15_92.bin
+Tiempo: Archivo: ./files/archivo_15_93.bin
+Tiempo: Archivo: ./files/archivo_15_94.bin
+Tiempo: Archivo: ./files/archivo_15_95.bin
+Tiempo: Archivo: ./files/archivo_15_96.bin
+Tiempo: Archivo: ./files/archivo_15_97.bin
+Tiempo: Archivo: ./files/archivo_15_98.bin
+Tiempo: Archivo: ./files/archivo_15_99.bin
+Tiempo: 0m40.249s
+0m41.537s
+0m42.175s
+0m40.408s
+0m42.833s
+0m43.029s
+0m39.610s
+0m42.720s
+0m43.121s
+0m41.762s
+0m42.972s
+0m43.592s
+0m43.631s
+0m43.694s
+0m43.366s
+0m43.804s
+0m43.924s
+0m43.955s
+0m43.939s
+0m43.956s
+0m42.676s
+0m44.250s
+0m44.387s
+0m44.438s
+0m44.700s
+0m42.848s
+0m45.113s
+0m45.091s
+0m43.534s
+0m45.213s
+0m45.248s
+0m42.212s
+0m45.329s
+0m44.215s
+0m45.477s
+0m45.679s
+0m44.585s
+0m45.669s
+0m46.029s
+0m46.277s
+0m46.261s
+0m46.409s
+0m46.138s
+0m45.983s
+0m44.774s
+0m44.684s
+0m46.244s
+0m46.593s
+0m46.133s
+0m46.963s
+0m46.407s
+0m45.297s
+0m45.824s
+0m47.148s
+0m45.582s
+0m47.282s
+0m47.194s
+0m45.393s
+0m44.819s
+0m46.809s
+0m47.475s
+0m47.363s
+0m44.150s
+0m46.432s
+0m47.278s
+0m45.933s
+0m47.546s
+0m47.619s
+0m47.190s
+0m45.275s
+0m47.706s
+0m47.706s
+0m47.720s
+0m46.856s
+0m47.861s
+0m47.863s
+0m47.939s
+0m47.966s
+0m47.994s
+0m47.821s
+0m46.343s
+0m47.970s
+0m47.748s
+0m47.433s
+0m48.368s
+0m48.127s
+0m48.173s
+0m48.047s
+0m47.149s
+0m48.357s
+0m48.178s
+0m46.663s
+0m48.489s
+0m46.708s
+0m48.447s
+0m48.518s
+0m48.486s
+0m48.262s
+0m48.173s
+1m12.134s
+
+----- size:1024 -----
+
+- 1 archivo grande
+Archivo: ./files/archivo_500_0.bin
+Tiempo: 0m16.483s
+
+- 3 archivos grandes
+Archivo: ./files/archivo_500_0.bin
+Tiempo: Archivo: ./files/archivo_500_1.bin
+Tiempo: Archivo: ./files/archivo_500_2.bin
+Tiempo: 0m29.589s
+0m29.594s
+0m29.598s
+
+- 20 archivos medianos
+Archivo: ./files/archivo_75_0.bin
+Tiempo: Archivo: ./files/archivo_75_1.bin
+Tiempo: Archivo: ./files/archivo_75_2.bin
+Tiempo: Archivo: ./files/archivo_75_3.bin
+Tiempo: Archivo: ./files/archivo_75_4.bin
+Tiempo: Archivo: ./files/archivo_75_5.bin
+Tiempo: Archivo: ./files/archivo_75_6.bin
+Tiempo: Archivo: ./files/archivo_75_7.bin
+Tiempo: Archivo: ./files/archivo_75_8.bin
+Tiempo: Archivo: ./files/archivo_75_9.bin
+Tiempo: Archivo: ./files/archivo_75_10.bin
+Tiempo: Archivo: ./files/archivo_75_11.bin
+Tiempo: Archivo: ./files/archivo_75_12.bin
+Tiempo: Archivo: ./files/archivo_75_13.bin
+Tiempo: Archivo: ./files/archivo_75_14.bin
+Tiempo: Archivo: ./files/archivo_75_15.bin
+Tiempo: Archivo: ./files/archivo_75_16.bin
+Tiempo: Archivo: ./files/archivo_75_17.bin
+Tiempo: Archivo: ./files/archivo_75_18.bin
+Tiempo: Archivo: ./files/archivo_75_19.bin
+Tiempo: 0m37.375s
+0m37.292s
+0m37.267s
+0m37.419s
+0m37.466s
+0m37.368s
+0m37.503s
+0m37.488s
+0m37.476s
+0m37.512s
+0m37.561s
+0m37.581s
+0m37.584s
+0m37.616s
+0m37.611s
+0m37.783s
+0m37.689s
+0m37.825s
+0m37.672s
+0m37.695s
+
+- 100 archivos pequeños
+Archivo: ./files/archivo_15_0.bin
+Tiempo: Archivo: ./files/archivo_15_1.bin
+Tiempo: Archivo: ./files/archivo_15_2.bin
+Tiempo: Archivo: ./files/archivo_15_3.bin
+Tiempo: Archivo: ./files/archivo_15_4.bin
+Tiempo: Archivo: ./files/archivo_15_5.bin
+Tiempo: Archivo: ./files/archivo_15_6.bin
+Tiempo: Archivo: ./files/archivo_15_7.bin
+Tiempo: Archivo: ./files/archivo_15_8.bin
+Tiempo: Archivo: ./files/archivo_15_9.bin
+Tiempo: Archivo: ./files/archivo_15_10.bin
+Tiempo: Archivo: ./files/archivo_15_11.bin
+Tiempo: Archivo: ./files/archivo_15_12.bin
+Tiempo: Archivo: ./files/archivo_15_13.bin
+Tiempo: Archivo: ./files/archivo_15_14.bin
+Tiempo: Archivo: ./files/archivo_15_15.bin
+Tiempo: Archivo: ./files/archivo_15_16.bin
+Tiempo: Archivo: ./files/archivo_15_17.bin
+Tiempo: Archivo: ./files/archivo_15_18.bin
+Tiempo: Archivo: ./files/archivo_15_19.bin
+Tiempo: Archivo: ./files/archivo_15_20.bin
+Tiempo: Archivo: ./files/archivo_15_21.bin
+Tiempo: Archivo: ./files/archivo_15_22.bin
+Tiempo: Archivo: ./files/archivo_15_23.bin
+Tiempo: Archivo: ./files/archivo_15_24.bin
+Tiempo: Archivo: ./files/archivo_15_25.bin
+Tiempo: Archivo: ./files/archivo_15_26.bin
+Tiempo: Archivo: ./files/archivo_15_27.bin
+Tiempo: Archivo: ./files/archivo_15_28.bin
+Tiempo: Archivo: ./files/archivo_15_29.bin
+Tiempo: Archivo: ./files/archivo_15_30.bin
+Tiempo: Archivo: ./files/archivo_15_31.bin
+Tiempo: Archivo: ./files/archivo_15_32.bin
+Tiempo: Archivo: ./files/archivo_15_33.bin
+Tiempo: Archivo: ./files/archivo_15_34.bin
+Tiempo: Archivo: ./files/archivo_15_35.bin
+Tiempo: Archivo: ./files/archivo_15_36.bin
+Tiempo: Archivo: ./files/archivo_15_37.bin
+Tiempo: Archivo: ./files/archivo_15_38.bin
+Tiempo: Archivo: ./files/archivo_15_39.bin
+Tiempo: Archivo: ./files/archivo_15_40.bin
+Tiempo: Archivo: ./files/archivo_15_41.bin
+Tiempo: Archivo: ./files/archivo_15_42.bin
+Tiempo: Archivo: ./files/archivo_15_43.bin
+Tiempo: Archivo: ./files/archivo_15_44.bin
+Tiempo: Archivo: ./files/archivo_15_45.bin
+Tiempo: Archivo: ./files/archivo_15_46.bin
+Tiempo: Archivo: ./files/archivo_15_47.bin
+Tiempo: Archivo: ./files/archivo_15_48.bin
+Tiempo: Archivo: ./files/archivo_15_49.bin
+Tiempo: Archivo: ./files/archivo_15_50.bin
+Tiempo: Archivo: ./files/archivo_15_51.bin
+Tiempo: Archivo: ./files/archivo_15_52.bin
+Tiempo: Archivo: ./files/archivo_15_53.bin
+Tiempo: Archivo: ./files/archivo_15_54.bin
+Tiempo: Archivo: ./files/archivo_15_55.bin
+Tiempo: Archivo: ./files/archivo_15_56.bin
+Tiempo: Archivo: ./files/archivo_15_57.bin
+Tiempo: Archivo: ./files/archivo_15_58.bin
+Tiempo: Archivo: ./files/archivo_15_59.bin
+Tiempo: Archivo: ./files/archivo_15_60.bin
+Tiempo: Archivo: ./files/archivo_15_61.bin
+Tiempo: Archivo: ./files/archivo_15_62.bin
+Tiempo: Archivo: ./files/archivo_15_63.bin
+Tiempo: Archivo: ./files/archivo_15_64.bin
+Tiempo: Archivo: ./files/archivo_15_65.bin
+Tiempo: Archivo: ./files/archivo_15_66.bin
+Tiempo: Archivo: ./files/archivo_15_67.bin
+Tiempo: Archivo: ./files/archivo_15_68.bin
+Tiempo: Archivo: ./files/archivo_15_69.bin
+Tiempo: Archivo: ./files/archivo_15_70.bin
+Tiempo: Archivo: ./files/archivo_15_71.bin
+Tiempo: Archivo: ./files/archivo_15_72.bin
+Tiempo: Archivo: ./files/archivo_15_73.bin
+Tiempo: Archivo: ./files/archivo_15_74.bin
+Tiempo: Archivo: ./files/archivo_15_75.bin
+Tiempo: Archivo: ./files/archivo_15_76.bin
+Tiempo: Archivo: ./files/archivo_15_77.bin
+Tiempo: Archivo: ./files/archivo_15_78.bin
+Tiempo: Archivo: ./files/archivo_15_79.bin
+Tiempo: Archivo: ./files/archivo_15_80.bin
+Tiempo: Archivo: ./files/archivo_15_81.bin
+Tiempo: Archivo: ./files/archivo_15_82.bin
+Tiempo: Archivo: ./files/archivo_15_83.bin
+Tiempo: Archivo: ./files/archivo_15_84.bin
+Tiempo: Archivo: ./files/archivo_15_85.bin
+Tiempo: Archivo: ./files/archivo_15_86.bin
+Tiempo: Archivo: ./files/archivo_15_87.bin
+Tiempo: Archivo: ./files/archivo_15_88.bin
+Tiempo: Archivo: ./files/archivo_15_89.bin
+Tiempo: Archivo: ./files/archivo_15_90.bin
+Tiempo: Archivo: ./files/archivo_15_91.bin
+Tiempo: Archivo: ./files/archivo_15_92.bin
+Tiempo: Archivo: ./files/archivo_15_93.bin
+Tiempo: Archivo: ./files/archivo_15_94.bin
+Tiempo: Archivo: ./files/archivo_15_95.bin
+Tiempo: Archivo: ./files/archivo_15_96.bin
+Tiempo: Archivo: ./files/archivo_15_97.bin
+Tiempo: Archivo: ./files/archivo_15_98.bin
+Tiempo: Archivo: ./files/archivo_15_99.bin
+Tiempo: 0m33.195s
+0m27.546s
+0m33.189s
+0m22.996s
+0m33.449s
+0m32.304s
+0m33.751s
+0m21.975s
+0m22.960s
+0m25.775s
+0m32.365s
+0m34.251s
+0m22.982s
+0m34.517s
+0m34.707s
+0m35.860s
+0m29.395s
+0m35.896s
+0m31.588s
+0m35.875s
+0m35.762s
+0m34.971s
+0m35.969s
+0m35.875s
+0m34.811s
+0m36.044s
+0m22.964s
+0m22.315s
+0m24.880s
+0m23.862s
+0m33.690s
+0m36.098s
+0m22.792s
+0m34.855s
+0m32.464s
+0m25.887s
+0m33.816s
+0m34.667s
+0m22.072s
+0m35.777s
+0m23.498s
+0m23.902s
+0m28.267s
+0m24.260s
+0m24.528s
+0m36.400s
+0m22.541s
+0m36.115s
+0m23.895s
+0m21.638s
+0m22.576s
+0m23.068s
+0m31.086s
+0m24.507s
+0m24.464s
+0m22.536s
+0m29.315s
+0m24.146s
+0m35.356s
+0m24.802s
+0m24.866s
+0m35.413s
+0m30.308s
+0m36.862s
+0m31.994s
+0m24.541s
+0m22.271s
+0m27.094s
+0m25.848s
+0m26.242s
+0m24.296s
+0m37.160s
+0m25.617s
+0m24.876s
+0m35.513s
+0m37.428s
+0m37.319s
+0m36.390s
+0m37.411s
+0m37.344s
+0m37.366s
+0m37.713s
+0m37.791s
+0m25.564s
+0m37.138s
+0m38.633s
+0m38.745s
+0m29.022s
+0m39.712s
+0m40.801s
+0m40.466s
+0m40.733s
+0m41.345s
+0m41.144s
+0m41.901s
+0m41.866s
+0m42.499s
+0m43.816s
+0m46.344s
+0m46.632s
+
+----- size:8192 -----
+
+- 1 archivo grande
+Archivo: ./files/archivo_500_0.bin
+Tiempo: 0m15.746s
+
+- 3 archivos grandes
+Archivo: ./files/archivo_500_0.bin
+Tiempo: Archivo: ./files/archivo_500_1.bin
+Tiempo: Archivo: ./files/archivo_500_2.bin
+Tiempo: 0m45.377s
+0m45.276s
+0m45.318s
+
+- 20 archivos medianos
+Archivo: ./files/archivo_75_0.bin
+Tiempo: Archivo: ./files/archivo_75_1.bin
+Tiempo: Archivo: ./files/archivo_75_2.bin
+Tiempo: Archivo: ./files/archivo_75_3.bin
+Tiempo: Archivo: ./files/archivo_75_4.bin
+Tiempo: Archivo: ./files/archivo_75_5.bin
+Tiempo: Archivo: ./files/archivo_75_6.bin
+Tiempo: Archivo: ./files/archivo_75_7.bin
+Tiempo: Archivo: ./files/archivo_75_8.bin
+Tiempo: Archivo: ./files/archivo_75_9.bin
+Tiempo: Archivo: ./files/archivo_75_10.bin
+Tiempo: Archivo: ./files/archivo_75_11.bin
+Tiempo: Archivo: ./files/archivo_75_12.bin
+Tiempo: Archivo: ./files/archivo_75_13.bin
+Tiempo: Archivo: ./files/archivo_75_14.bin
+Tiempo: Archivo: ./files/archivo_75_15.bin
+Tiempo: Archivo: ./files/archivo_75_16.bin
+Tiempo: Archivo: ./files/archivo_75_17.bin
+Tiempo: Archivo: ./files/archivo_75_18.bin
+Tiempo: Archivo: ./files/archivo_75_19.bin
+Tiempo: 0m14.593s
+0m17.128s
+0m18.792s
+0m18.867s
+0m19.076s
+0m19.892s
+0m19.861s
+0m20.617s
+0m20.785s
+0m20.910s
+0m21.375s
+0m21.386s
+0m21.387s
+0m21.328s
+0m21.413s
+0m21.491s
+0m21.631s
+0m21.476s
+0m21.679s
+0m21.722s
+
+- 100 archivos pequeños
+Archivo: ./files/archivo_15_0.bin
+Tiempo: Archivo: ./files/archivo_15_1.bin
+Tiempo: Archivo: ./files/archivo_15_2.bin
+Tiempo: Archivo: ./files/archivo_15_3.bin
+Tiempo: Archivo: ./files/archivo_15_4.bin
+Tiempo: Archivo: ./files/archivo_15_5.bin
+Tiempo: Archivo: ./files/archivo_15_6.bin
+Tiempo: Archivo: ./files/archivo_15_7.bin
+Tiempo: Archivo: ./files/archivo_15_8.bin
+Tiempo: Archivo: ./files/archivo_15_9.bin
+Tiempo: Archivo: ./files/archivo_15_10.bin
+Tiempo: Archivo: ./files/archivo_15_11.bin
+Tiempo: Archivo: ./files/archivo_15_12.bin
+Tiempo: Archivo: ./files/archivo_15_13.bin
+Tiempo: Archivo: ./files/archivo_15_14.bin
+Tiempo: Archivo: ./files/archivo_15_15.bin
+Tiempo: Archivo: ./files/archivo_15_16.bin
+Tiempo: Archivo: ./files/archivo_15_17.bin
+Tiempo: Archivo: ./files/archivo_15_18.bin
+Tiempo: Archivo: ./files/archivo_15_19.bin
+Tiempo: Archivo: ./files/archivo_15_20.bin
+Tiempo: Archivo: ./files/archivo_15_21.bin
+Tiempo: Archivo: ./files/archivo_15_22.bin
+Tiempo: Archivo: ./files/archivo_15_23.bin
+Tiempo: Archivo: ./files/archivo_15_24.bin
+Tiempo: Archivo: ./files/archivo_15_25.bin
+Tiempo: Archivo: ./files/archivo_15_26.bin
+Tiempo: Archivo: ./files/archivo_15_27.bin
+Tiempo: Archivo: ./files/archivo_15_28.bin
+Tiempo: Archivo: ./files/archivo_15_29.bin
+Tiempo: Archivo: ./files/archivo_15_30.bin
+Tiempo: Archivo: ./files/archivo_15_31.bin
+Tiempo: Archivo: ./files/archivo_15_32.bin
+Tiempo: Archivo: ./files/archivo_15_33.bin
+Tiempo: Archivo: ./files/archivo_15_34.bin
+Tiempo: Archivo: ./files/archivo_15_35.bin
+Tiempo: Archivo: ./files/archivo_15_36.bin
+Tiempo: Archivo: ./files/archivo_15_37.bin
+Tiempo: Archivo: ./files/archivo_15_38.bin
+Tiempo: Archivo: ./files/archivo_15_39.bin
+Tiempo: Archivo: ./files/archivo_15_40.bin
+Tiempo: Archivo: ./files/archivo_15_41.bin
+Tiempo: Archivo: ./files/archivo_15_42.bin
+Tiempo: Archivo: ./files/archivo_15_43.bin
+Tiempo: Archivo: ./files/archivo_15_44.bin
+Tiempo: Archivo: ./files/archivo_15_45.bin
+Tiempo: Archivo: ./files/archivo_15_46.bin
+Tiempo: Archivo: ./files/archivo_15_47.bin
+Tiempo: Archivo: ./files/archivo_15_48.bin
+Tiempo: Archivo: ./files/archivo_15_49.bin
+Tiempo: Archivo: ./files/archivo_15_50.bin
+Tiempo: Archivo: ./files/archivo_15_51.bin
+Tiempo: Archivo: ./files/archivo_15_52.bin
+Tiempo: Archivo: ./files/archivo_15_53.bin
+Tiempo: Archivo: ./files/archivo_15_54.bin
+Tiempo: Archivo: ./files/archivo_15_55.bin
+Tiempo: Archivo: ./files/archivo_15_56.bin
+Tiempo: Archivo: ./files/archivo_15_57.bin
+Tiempo: Archivo: ./files/archivo_15_58.bin
+Tiempo: Archivo: ./files/archivo_15_59.bin
+Tiempo: Archivo: ./files/archivo_15_60.bin
+Tiempo: Archivo: ./files/archivo_15_61.bin
+Tiempo: Archivo: ./files/archivo_15_62.bin
+Tiempo: Archivo: ./files/archivo_15_63.bin
+Tiempo: Archivo: ./files/archivo_15_64.bin
+Tiempo: Archivo: ./files/archivo_15_65.bin
+Tiempo: Archivo: ./files/archivo_15_66.bin
+Tiempo: Archivo: ./files/archivo_15_67.bin
+Tiempo: Archivo: ./files/archivo_15_68.bin
+Tiempo: Archivo: ./files/archivo_15_69.bin
+Tiempo: Archivo: ./files/archivo_15_70.bin
+Tiempo: Archivo: ./files/archivo_15_71.bin
+Tiempo: Archivo: ./files/archivo_15_72.bin
+Tiempo: Archivo: ./files/archivo_15_73.bin
+Tiempo: Archivo: ./files/archivo_15_74.bin
+Tiempo: Archivo: ./files/archivo_15_75.bin
+Tiempo: Archivo: ./files/archivo_15_76.bin
+Tiempo: Archivo: ./files/archivo_15_77.bin
+Tiempo: Archivo: ./files/archivo_15_78.bin
+Tiempo: Archivo: ./files/archivo_15_79.bin
+Tiempo: Archivo: ./files/archivo_15_80.bin
+Tiempo: Archivo: ./files/archivo_15_81.bin
+Tiempo: Archivo: ./files/archivo_15_82.bin
+Tiempo: Archivo: ./files/archivo_15_83.bin
+Tiempo: Archivo: ./files/archivo_15_84.bin
+Tiempo: Archivo: ./files/archivo_15_85.bin
+Tiempo: Archivo: ./files/archivo_15_86.bin
+Tiempo: Archivo: ./files/archivo_15_87.bin
+Tiempo: Archivo: ./files/archivo_15_88.bin
+Tiempo: Archivo: ./files/archivo_15_89.bin
+Tiempo: Archivo: ./files/archivo_15_90.bin
+Tiempo: Archivo: ./files/archivo_15_91.bin
+Tiempo: Archivo: ./files/archivo_15_92.bin
+Tiempo: Archivo: ./files/archivo_15_93.bin
+Tiempo: Archivo: ./files/archivo_15_94.bin
+Tiempo: Archivo: ./files/archivo_15_95.bin
+Tiempo: Archivo: ./files/archivo_15_96.bin
+Tiempo: Archivo: ./files/archivo_15_97.bin
+Tiempo: Archivo: ./files/archivo_15_98.bin
+Tiempo: Archivo: ./files/archivo_15_99.bin
+Tiempo: 0m29.159s
+0m23.709s
+0m26.531s
+0m25.199s
+0m25.255s
+0m25.106s
+0m27.949s
+0m25.320s
+0m27.093s
+0m27.574s
+0m27.438s
+0m43.153s
+0m27.174s
+0m29.434s
+0m36.236s
+0m27.687s
+0m33.121s
+0m28.975s
+0m34.344s
+0m37.768s
+0m43.579s
+0m44.801s
+0m44.619s
+0m29.073s
+0m42.975s
+0m31.310s
+0m43.323s
+0m41.554s
+0m39.081s
+0m31.040s
+0m39.488s
+0m35.933s
+0m44.402s
+0m36.737s
+0m42.895s
+0m32.309s
+0m44.109s
+0m36.296s
+0m41.171s
+0m31.268s
+0m45.574s
+0m45.361s
+0m45.413s
+0m31.341s
+0m45.068s
+0m45.562s
+0m38.506s
+0m44.528s
+0m45.592s
+0m45.690s
+0m31.286s
+0m30.572s
+0m31.615s
+0m45.964s
+0m39.681s
+0m42.174s
+0m45.820s
+0m46.010s
+0m34.349s
+0m45.897s
+0m31.446s
+0m46.043s
+0m45.947s
+0m29.491s
+0m46.254s
+0m46.025s
+0m32.072s
+0m45.979s
+0m46.063s
+0m34.025s
+0m45.985s
+0m30.649s
+0m32.367s
+0m46.610s
+0m46.415s
+0m46.485s
+0m46.676s
+0m45.537s
+0m46.655s
+0m46.712s
+0m44.894s
+0m46.762s
+0m46.693s
+0m46.709s
+0m46.680s
+0m32.754s
+0m46.775s
+0m46.842s
+0m46.835s
+0m46.891s
+0m37.565s
+0m47.029s
+0m46.961s
+0m47.057s
+0m47.110s
+0m47.715s
+0m47.749s
+0m47.802s
+0m50.278s
+1m7.851s
