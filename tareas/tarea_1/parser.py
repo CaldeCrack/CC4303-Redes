@@ -59,6 +59,17 @@ def str_to_milli(time: str) -> int:
 	return 60 * int(minutes) + float(sec)
 
 
+def str_to_milli2(text: str):
+	time, server = text.split("| ")
+	server = server[-1]
+	return str_to_milli(time), server
+
+
+def milli_to_str2(tuple) -> str:
+	time, server = tuple[0], tuple[1]
+	return f"{milli_to_str(float(time)):9}| {server}"
+
+
 def results(file: str) -> None:
 	server: int = int(file[5])
 	with open(file, "r", encoding="utf8") as f:
@@ -105,7 +116,8 @@ print_results(2)
 
 print("- Recommendation")
 for size, value in best_times.items():
-		print(f"buffer size: {size}")
-		for amount, value_2 in value.items():
-			print(f"file amount: {amount:3} | time: {min(value_2)[:-1]:9}server: {min(value_2)[-1]}")
-		print()
+	print(f"buffer size: {size}")
+	for amount, value_2 in value.items():
+		min_value: str = milli_to_str2(min(map(str_to_milli2, value_2)))
+		print(f"file amount: {amount:3} | time: {min_value[:-3]} | server: {min_value[-1]}")
+	print()
