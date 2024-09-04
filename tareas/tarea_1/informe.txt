@@ -4,10 +4,109 @@ Estudiante: Andrés Calderón Guardia
 1.
 Para la experimentación se cuenta con un computador con 8GB de RAM, un procesador Intel Core i3, y sistema operativo Windows 11, pero el experimento se corrió mediante WSL2, el cual posee Ubuntu noble 24.04.
 Respecto a la ejecución de las mediciones, tras testear ciertos tamaños de archivos grandes se utilizó 0.5GB como estándar, ya que con este valor, usando localhost y en particular para un size de 1024 bytes se demoraba aproximadamente los 5 segundos requeridos, de esa forma los archivos medianos quedaron en 75MB y los pequeños en 15MB.
-Ya en la experimentación sí, se utilizó el archivo "experimentation.sh", el cual antes de todo crea los archivos a utilizar por los clientes usando el script "create_files.py", en caso de que ya existan estos entonces se salta su creación, luego, ejecuta los 4 puntos de las mediciones, asegurándose que en cada caso los clientes se conecten en paralelo, exceptuando el primero al ser tan solo un archivo. Tras esto las mediciones de tiempo para cada cliente se escriben en el archivo "time.txt".
+Ya en la experimentación sí, se utilizó el archivo "experimentation.sh", el cual antes de todo crea los archivos a utilizar por los clientes usando el script "create_files.py", en caso de que ya existan estos entonces se salta su creación, luego, ejecuta los 4 puntos de las mediciones, asegurándose que en cada caso los clientes se conecten en paralelo, exceptuando el primero al ser tan solo un archivo. Tras esto las mediciones de tiempo para cada cliente, considerando solo el tiempo real de ejecución, se escriben en el archivo "time.txt".
 En este archivo se separan los resultados, primero, por los distintos sizes elegidos, que en este caso fueron tres: 128, 1024 y 8192, luego, por las cuatro distintas pruebas a realizar, y finalmente por cada cliente individual, de modo que en el output final se muestra el archivo del cliente que lo escribió y el tiempo que le tomó.
 Y por último, se realizó toda esta experimentación para los 3 servidores proveídos, y sus respectivos resultados se guardaron en los archivos "time_2.txt", "time_4.txt" y "time_5.txt", con el número indicando cual server se utilizó.
 
 2.
+Para medir los resultados que se guardaron en los 3 archivos se utilizó un script de Python, el cual lee estos archivos, y promedia el tiempo que le tomó realizar la medición a los clientes por cada caso, guardando los resultados en una lista para finalmente elegir el servidor que le tomó el menor tiempo en terminar en promedio. Los resultados obtenidos se muestran a continuación, donde cada tabla es para un server distinto:
++---------------------------------------+
+|             server_echo2.py           |
++-------------+-------------+-----------+
+| Buffer Size | File Amount | Time      |
++-------------+-------------+-----------+
+| 128         | 1           | 0m37.532s |
+|             | 3           | 0m26.635s |
+|             | 20          | 0m23.552s |
+|             | 100         | 0m28.352s |
++-------------+-------------+-----------+
+| 1024        | 1           | 0m13.489s |
+|             | 3           | 0m16.446s |
+|             | 20          | 0m4.369s  |
+|             | 100         | 0m3.663s  |
++-------------+-------------+-----------+
+| 8192        | 1           | 0m2.391s  |
+|             | 3           | 0m2.994s  |
+|             | 20          | 0m2.450s  |
+|             | 100         | 0m3.859s  |
++-------------+-------------+-----------+
+
++---------------------------------------+
+|             server_echo4.py           |
++-------------+-------------+-----------+
+| Buffer Size | File Amount | Time      |
++-------------+-------------+-----------+
+| 128         | 1           | 0m24.270s |
+|             | 3           | 0m29.695s |
+|             | 20          | 0m16.148s |
+|             | 100         | 0m9.728s  |
++-------------+-------------+-----------+
+| 1024        | 1           | 0m13.868s |
+|             | 3           | 0m10.784s |
+|             | 20          | 0m18.804s |
+|             | 100         | 0m6.208s  |
++-------------+-------------+-----------+
+| 8192        | 1           | 0m7.667s  |
+|             | 3           | 0m6.815s  |
+|             | 20          | 0m7.547s  |
+|             | 100         | 0m5.808s  |
++-------------+-------------+-----------+
+
++---------------------------------------+
+|             server_echo5.py           |
++-------------+-------------+-----------+
+| Buffer Size | File Amount | Time      |
++-------------+-------------+-----------+
+| 128         | 1           | 0m19.295s |
+|             | 3           | 0m22.377s |
+|             | 20          | 0m17.545s |
+|             | 100         | 0m12.956s |
++-------------+-------------+-----------+
+| 1024        | 1           | 0m15.953s |
+|             | 3           | 0m18.271s |
+|             | 20          | 0m20.914s |
+|             | 100         | 3m4.448s  |
++-------------+-------------+-----------+
+| 8192        | 1           | 0m5.879s  |
+|             | 3           | 0m17.591s |
+|             | 20          | 0m15.522s |
+|             | 100         | 0m14.829s |
++-------------+-------------+-----------+
+
+Con estos resultados finalmente elegimos el menor tiempo por caso, lo que resulta en lo siguiente:
++-------------+-------------+-----------+--------+
+| Buffer Size | File Amount | Time      | Server |
++-------------+-------------+-----------+--------+
+| 128         | 1           | 0m19.295s | 5      |
+|             | 3           | 0m22.377s | 5      |
+|             | 20          | 0m16.148s | 4      |
+|             | 100         | 0m12.956s | 5      |
++-------------+-------------+-----------+--------+
+| 1024        | 1           | 0m13.489s | 2      |
+|             | 3           | 0m10.784s | 4      |
+|             | 20          | 0m18.804s | 4      |
+|             | 100         | 0m3.663s  | 2      |
++-------------+-------------+-----------+--------+
+| 8192        | 1           | 0m2.391s  | 2      |
+|             | 3           | 0m17.591s | 5      |
+|             | 20          | 0m15.522s | 5      |
+|             | 100         | 0m14.829s | 5      |
++-------------+-------------+-----------+--------+
+
+3.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

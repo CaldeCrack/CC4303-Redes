@@ -1,23 +1,23 @@
 #!/usr/bin/python3
 
-best_times: dict[int, dict[int, str]] = {
+best_times: dict[int, dict[int, list[str]]] = {
 	128: {
-		1: "ñ",
-		3: "ñ",
-		20: "ñ",
-		100: "ñ"
+		1: [],
+		3: [],
+		20: [],
+		100: []
 	},
 	1024: {
-		1: "ñ",
-		3: "ñ",
-		20: "ñ",
-		100: "ñ"
+		1: [],
+		3: [],
+		20: [],
+		100: []
 	},
 	8192: {
-		1: "ñ",
-		3: "ñ",
-		20: "ñ",
-		100: "ñ"
+		1: [],
+		3: [],
+		20: [],
+		100: []
 	}
 }
 
@@ -48,11 +48,24 @@ def match_files(line: str) -> int:
 			return 0
 
 
+def milli_to_str(time: int) -> str:
+	minutes: int = int(time // 60)
+	seconds: float = round(time % 60.0, 3)
+	return f"{minutes}m{seconds}s"
+
+
+def str_to_milli(time: str) -> int:
+	minutes, sec = time.strip()[:-1].split("m")
+	return 60 * int(minutes) + float(sec)
+
+
 def results(file: str) -> None:
 	server: int = int(file[5])
 	with open(file, "r", encoding="utf8") as f:
 		size: int = 128
 		amount: int = 1
+		cumsum: float = 0.0
+		n: int = 0
 		line: str = f.readline()
 
 		while line:
@@ -61,12 +74,38 @@ def results(file: str) -> None:
 			elif curr_size := match_size(line):
 				size = curr_size
 			elif "Tiempo:" in line:
-				best_times[size][amount] = min(best_times[size][amount], f"{line.split()[-1]:9} | {server}")
+				cumsum += str_to_milli(line.split()[-1])
+				n += 1
+			elif line == "\n" and n:
+				best_times[size][amount].append(f"{milli_to_str(cumsum / n):9} | {server}")
+				cumsum, n = 0.0, 0
 			line: str = f.readline()
+		best_times[size][amount].append(f"{milli_to_str(cumsum / n):9} | {server}")
 
 
 results("time_2.txt")
 results("time_4.txt")
 results("time_5.txt")
-for key, value in best_times.items():
-	print(f"{key:4}: {value}")
+
+def print_results(i: int) -> None:
+	for size, value in best_times.items():
+		print(f"buffer size: {size}")
+		for amount, value_2 in value.items():
+			print(f"file amount: {amount:3} | time: {value_2[i][:-4]:9}")
+		print()
+	print()
+
+# Display results per server
+print("- server_echo2.py")
+print_results(0)
+print("- server_echo4.py")
+print_results(1)
+print("- server_echo5.py")
+print_results(2)
+
+print("- Recommendation")
+for size, value in best_times.items():
+		print(f"buffer size: {size}")
+		for amount, value_2 in value.items():
+			print(f"file amount: {amount:3} | time: {min(value_2)[:-1]:9}server: {min(value_2)[-1]}")
+		print()
