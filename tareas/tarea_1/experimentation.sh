@@ -73,4 +73,5 @@ do
 done
 
 rm -f time.txt.lock
+rm -f result.bin
 echo ""

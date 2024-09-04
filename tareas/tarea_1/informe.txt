@@ -1,0 +1,13 @@
+- Tarea 1
+Estudiante: Andrés Calderón Guardia
+
+1.
+Para la experimentación se cuenta con un computador con 8GB de RAM, un procesador Intel Core i3, y sistema operativo Windows 11, pero el experimento se corrió mediante WSL2, el cual posee Ubuntu noble 24.04.
+Respecto a la ejecución de las mediciones, tras testear ciertos tamaños de archivos grandes se utilizó 0.5GB como estándar, ya que con este valor, usando localhost y en particular para un size de 1024 bytes se demoraba aproximadamente los 5 segundos requeridos, de esa forma los archivos medianos quedaron en 75MB y los pequeños en 15MB.
+Ya en la experimentación sí, se utilizó el archivo "experimentation.sh", el cual antes de todo crea los archivos a utilizar por los clientes usando el script "create_files.py", en caso de que ya existan estos entonces se salta su creación, luego, ejecuta los 4 puntos de las mediciones, asegurándose que en cada caso los clientes se conecten en paralelo, exceptuando el primero al ser tan solo un archivo. Tras esto las mediciones de tiempo para cada cliente se escriben en el archivo "time.txt".
+En este archivo se separan los resultados, primero, por los distintos sizes elegidos, que en este caso fueron tres: 128, 1024 y 8192, luego, por las cuatro distintas pruebas a realizar, y finalmente por cada cliente individual, de modo que en el output final se muestra el archivo del cliente que lo escribió y el tiempo que le tomó.
+Y por último, se realizó toda esta experimentación para los 3 servidores proveídos, y sus respectivos resultados se guardaron en los archivos "time_2.txt", "time_4.txt" y "time_5.txt", con el número indicando cual server se utilizó.
+
+2.
+
+

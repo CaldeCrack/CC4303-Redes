@@ -3,7 +3,6 @@
 import jsockets, sys, threading
 
 def Rdr(s, size):
-	global total_size
 	while True:
 		try:
 			data = s.recv(size)
