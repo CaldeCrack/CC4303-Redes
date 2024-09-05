@@ -71,7 +71,7 @@ def milli_to_str2(tuple) -> str:
 
 
 def results(file: str) -> None:
-	server: int = int(file[5])
+	server: int = int(file[-5])
 	with open(file, "r", encoding="utf8") as f:
 		size: int = 128
 		amount: int = 1
@@ -121,3 +121,24 @@ for size, value in best_times.items():
 		min_value: str = milli_to_str2(min(map(str_to_milli2, value_2)))
 		print(f"file amount: {amount:3} | time: {min_value[:-3]} | server: {min_value[-1]}")
 	print()
+
+# Display results per anakena port
+best_times = {
+    1024: {
+        1: [],
+        3: [],
+        20: [],
+        100: []
+    }
+}
+results("time_anakena_2.txt")
+results("time_anakena_4.txt")
+results("time_anakena_5.txt")
+
+print("- anakena (server_echo2.py)")
+print_results(0)
+print("- anakena (server_echo4.py)")
+print_results(1)
+print("- anakena (server_echo5.py)")
+print_results(2)
+

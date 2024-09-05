@@ -1,9 +1,11 @@
 - Tarea 1
 Estudiante: Andrés Calderón Guardia
 
+(las tablas en este archivo no se ven muy bien si no se visualizan con una fuente monoespaciada, por lo que recomiendo leer este informe en una terminal)
+
 1.
 Para la experimentación se cuenta con un computador con 8GB de RAM, un procesador Intel Core i3, y sistema operativo Windows 11, pero el experimento se corrió mediante WSL2, el cual posee Ubuntu noble 24.04.
-Respecto a la ejecución de las mediciones, tras testear ciertos tamaños de archivos grandes se utilizó 0.5GB como estándar, ya que con este valor, usando localhost y en particular para un size de 1024 bytes se demoraba aproximadamente los 5 segundos requeridos, de esa forma los archivos medianos quedaron en 75MB y los pequeños en 15MB.
+Respecto a la ejecución de las mediciones, tras testear ciertos tamaños de archivos grandes se utilizó 0.5GB como estándar, ya que con este valor, usando localhost y en particular para un size de 1024 bytes se demoraba aproximadamente los 5 segundos requeridos, de esa forma los archivos medianos quedaron en 75MB y los pequeños en 15MB. Pese a esto, los tiempos solían variar moderadamente entre ejecuciones, razón por la cual en los resultados que se expondrán, el caso estándar elegido no duró 5 segundos sino que alrededor de 13.5 segundos.
 Ya en la experimentación sí, se utilizó el archivo "experimentation.sh", el cual antes de todo crea los archivos a utilizar por los clientes usando el script "create_files.py", en caso de que ya existan estos entonces se salta su creación, luego, ejecuta los 4 puntos de las mediciones, asegurándose que en cada caso los clientes se conecten en paralelo, exceptuando el primero al ser tan solo un archivo. Tras esto las mediciones de tiempo para cada cliente, considerando solo el tiempo real de ejecución, se escriben en el archivo "time.txt".
 En este archivo se separan los resultados, primero, por los distintos sizes elegidos, que en este caso fueron tres: 128, 1024 y 8192, luego, por las cuatro distintas pruebas a realizar, y finalmente por cada cliente individual, de modo que en el output final se muestra el archivo del cliente que lo escribió y el tiempo que le tomó.
 Y por último, se realizó toda esta experimentación para los 3 servidores proveídos, y sus respectivos resultados se guardaron en los archivos "time_2.txt", "time_4.txt" y "time_5.txt", con el número indicando cual server se utilizó.
@@ -93,20 +95,46 @@ Con estos resultados finalmente elegimos el menor tiempo por caso, lo que result
 |             | 100         | 0m3.859s  | 2      |
 +-------------+-------------+-----------+--------+
 
+Y con esto también es posible mencionar que la mejor combinación de valores para esta experimentación está cuando se utiliza el server_echo2.py en combinación con un buffer de 8192 bytes.
+
 3.
+Analizando estos resultados es posible evidenciar que hay una tendencia a que disminuya el tiempo de ejecución a medida que el buffer aumenta, esto posiblemente sea debido a que se hace un mejor uso de la RAM disponible en el dispositivo, reduciendo los ciclos necesarios que necesita cada cliente para ejecutar el experimento.
+Y respecto a los servidores también se observa una tendencia a que los resultados sean mejores utilizando el server_echo2.py a medida que crece el buffer, mientras que si son menores conviene más los otros 2 servers. Una posible explicación de este comportamiento sería que este servidor genera la paralelización mediante procesos pesados, los cuales para este caso no deberían compartir memoria puesto que los archivos que utiliza cada proceso son independientes, de modo que no debería haber un costo asocidado a la copia de datos, y también está el tema de que estos procesos requieren realizar un mayor trabajo a medida que aumenta el tamaño del buffer, lo cual es ideal para fork. En contraparte, los otros dos servidores están optimizados para realizar trabajos ligeros en paralelo, de modo que existe un sobrecosto al tener que hacer trabajo más complejo en comparación a como ocurre con el primer servidor, generando este comportamiento de perder eficiencia a medida que el trabajo individual aumenta.
 
+4.
+Similarmente a la experimentación anterior, se utilizaron los mismos archivos y se eligió un tamaño de 1024 bytes para el buffer. Para ejecutarla se creó un segundo archivo llamado "experimentation_anakena.sh" con el cual se realizan las ejecuciones (el puerto se cambió manualmente dentro del archivo para cada ejecución), y los resultados para cada servidor finalmente se guardaron en los archivos "time_anakena_2.py", "time_anakena_4.py" y "time_anakena_5.py", los cuales nuevamente se diferencian en que el número indica cual server se utilizó, y luego el mismo script usado anteriormente para parsear los resultados lee e imprime la siguiente información:
++-------------------------+
+|anakena (server_echo2.py)|
++-------------+-----------+
+| File Amount | Time      |
++-------------+-----------+
+| 1           | 0m59.778s |
+| 3           | 1m40.388s |
+| 20          | 1m36.137s |
+| 100         | 1m36.573s |
++-------------+-----------+
 
++-------------------------+
+|anakena (server_echo4.py)|
++-------------+-----------+
+| File Amount | Time      |
++-------------+-----------+
+| 1           | 0m36.173s |
+| 3           | 1m46.269s |
+| 20          | 1m33.397s |
+| 100         | 1m29.708s |
++-------------+-----------+
 
-
-
-
-
-
-
-
-
-
-
-
-
++-------------------------+
+|anakena (server_echo5.py)|
++-------------+-----------+
+| File Amount | Time      |
++-------------+-----------+
+| 1           | 0m0.080s  |
+| 3           | 0m0.063s  |
+| 20          | 0m0.151s  |
+| 100         | 0m0.875s  |
++-------------+-----------+
+De estas tablas hay que destacar que en general los tiempos son bastante mayores a los que se obtuvieron utilizando localhost, esto debido a que ahora la transferencia de datos se ve limitada por la conexión a internet más que por el hardware utilizado, con la única excepción siendo el último, lo cual, comprobando al momento de realizar esta entrega, se debe a que el puerto se encuentra cerrado, de modo que no es posible realizar la conexión y la ejecución termina inmediatamente.
+Pese a esto, basándonos tan solo en las primeras dos tablas, no es muy apreciable una diferencia en los tiempos, más allá de que al enviar un solo archivo grande al servidor que usa threads, este se demora cerca de la mitad del tiempo que el otro, por lo que finalmente la única conclusión que se puede obtener respecto a si estos resultados se parecen a los que se consiguen usando localhost, es que no, ya que no existe una mejora notable como si se aprecia en los resultados del punto 2).
 
