@@ -130,11 +130,11 @@ Similarmente a la experimentación anterior, se utilizaron los mismos archivos y
 +-------------+-----------+
 | File Amount | Time      |
 +-------------+-----------+
-| 1           | 0m0.080s  |
-| 3           | 0m0.063s  |
-| 20          | 0m0.151s  |
-| 100         | 0m0.875s  |
+| 1           | 1m4.213s  |
+| 3           | 1m58.974s |
+| 20          | 1m40.912s |
+| 100         | 1m19.204s |
 +-------------+-----------+
-De estas tablas hay que destacar que en general los tiempos son bastante mayores a los que se obtuvieron utilizando localhost, esto debido a que ahora la transferencia de datos se ve limitada por la conexión a internet más que por el hardware utilizado, con la única excepción siendo el último, lo cual, comprobando al momento de realizar esta entrega, se debe a que el puerto se encuentra cerrado, de modo que no es posible realizar la conexión y la ejecución termina inmediatamente.
-Pese a esto, basándonos tan solo en las primeras dos tablas, no es muy apreciable una diferencia en los tiempos, más allá de que al enviar un solo archivo grande al servidor que usa threads, este se demora cerca de la mitad del tiempo que el otro, por lo que finalmente la única conclusión que se puede obtener respecto a si estos resultados se parecen a los que se consiguen usando localhost, es que no, ya que no existe una mejora notable como si se aprecia en los resultados del punto 2).
+De estas tablas hay que destacar que en general los tiempos son bastante mayores a los que se obtuvieron utilizando localhost, esto debido a que ahora la transferencia de datos se ve limitada por la conexión a internet más que por el hardware utilizado.
+Finalmente, no es muy apreciable una diferencia muy notable en los tiempos, más allá de que al enviar un solo archivo grande al servidor que usa threads, este se demora cerca de la mitad del tiempo que los otros dos, por lo que finalmente la única conclusión que se puede obtener respecto a si estos resultados se parecen a los que se consiguen usando localhost, es que no, ya que no existe una mejora notable entre servidores como si se aprecia en los resultados del punto 2).
 
