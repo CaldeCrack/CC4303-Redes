@@ -1,0 +1,79 @@
+- Actividad evaluada 3 (agrimed.cl)
+Estudiante: Andrés Calderón Guardia
+
+Para iniciar el diágnostico consultamos el dominio usando el resolver default:
+
+; <<>> DiG 9.18.24-0ubuntu5-Ubuntu <<>> ns agrimed.cl
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 26029
+;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 4
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 512
+;; QUESTION SECTION:
+;agrimed.cl.                    IN      NS
+
+;; ANSWER SECTION:
+agrimed.cl.             3242    IN      NS      secundario.nic.cl.
+agrimed.cl.             3242    IN      NS      renare.uchile.cl.
+
+;; ADDITIONAL SECTION:
+secundario.nic.cl.      15015   IN      A       200.7.5.7
+secundario.nic.cl.      17523   IN      AAAA    2001:1398:276:0:200:7:5:7
+renare.uchile.cl.       3242    IN      A       200.89.72.24
+
+;; Query time: 9 msec
+;; SERVER: 10.255.255.254#53(10.255.255.254) (UDP)
+;; WHEN: Mon Sep 09 22:47:40 -03 2024
+;; MSG SIZE  rcvd: 156
+
+De este output podemos ver que existen dos servidores de nombres del dominio "agrimed.cl" y nos muestra que el primero posee dos direcciones de IPs, mientras que el segundo tan solo una. Ahora, si consultamos este dominio usando los dos servidores de nombres proporcionados obtenemos:
+
+; <<>> DiG 9.18.24-0ubuntu5-Ubuntu <<>> ns agrimed.cl @secundario.nic.cl
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: SERVFAIL, id: 20024
+;; flags: qr rd; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+;; WARNING: recursion requested but not available
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+; COOKIE: 2cb57a13a738774f0100000066dfa82b605fbaf13e47a1e3 (good)
+;; QUESTION SECTION:
+;agrimed.cl.                    IN      NS
+
+;; Query time: 19 msec
+;; SERVER: 200.7.5.7#53(secundario.nic.cl) (UDP)
+;; WHEN: Mon Sep 09 23:00:10 -03 2024
+;; MSG SIZE  rcvd: 67
+
+#############################################################################
+
+; <<>> DiG 9.18.24-0ubuntu5-Ubuntu <<>> ns agrimed.cl @renare.uchile.cl
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 5912
+;; flags: qr aa rd; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 3
+;; WARNING: recursion requested but not available
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 4000
+;; QUESTION SECTION:
+;agrimed.cl.                    IN      NS
+
+;; ANSWER SECTION:
+agrimed.cl.             3600    IN      NS      secundario.nic.cl.
+agrimed.cl.             3600    IN      NS      renare.uchile.cl.
+
+;; ADDITIONAL SECTION:
+secundario.nic.cl.      3600    IN      A       200.1.123.7
+renare.uchile.cl.       3600    IN      A       200.89.72.24
+
+;; Query time: 19 msec
+;; SERVER: 200.89.72.24#53(renare.uchile.cl) (UDP)
+;; WHEN: Mon Sep 09 23:00:40 -03 2024
+;; MSG SIZE  rcvd: 128
+
+Si se utiliza "renare.uchile.cl" no se observa ningún problema más allá de una advertencia, mientras que con "secundario.nic.cl", además de la misma advertencia, no se obtuvo una "ANSWER SECTION" puesto que la consulta no fue respondida, debido a que se obtuvo el error "SERVFAIL", implicando que este NS si existe pero arrojó un error de código.
+

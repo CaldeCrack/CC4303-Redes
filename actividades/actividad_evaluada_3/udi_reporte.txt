@@ -1,0 +1,95 @@
+- Actividad evaluada 3 (udi.cl)
+Estudiante: Andrés Calderón Guardia
+
+Si ejecutamos el comando para el dominio "udi.cl" usando el resolver por defecto obtenemos:
+
+; <<>> DiG 9.18.24-0ubuntu5-Ubuntu <<>> udi.cl
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 61035
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 512
+;; QUESTION SECTION:
+;udi.cl.                                IN      A
+
+;; ANSWER SECTION:
+udi.cl.                 60      IN      A       209.14.251.10
+
+;; Query time: 209 msec
+;; SERVER: 10.255.255.254#53(10.255.255.254) (UDP)
+;; WHEN: Mon Sep 09 23:42:43 -03 2024
+;; MSG SIZE  rcvd: 51
+
+Con esto vemos que el resolver default no obtiene información suficiente, así que ahora probaremos usando el NS "a.nic.cl":
+
+; <<>> DiG 9.18.24-0ubuntu5-Ubuntu <<>> udi.cl @a.nic.cl
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 56361
+;; flags: qr rd; QUERY: 1, ANSWER: 0, AUTHORITY: 2, ADDITIONAL: 2
+;; WARNING: recursion requested but not available
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+; COOKIE: 31f24730221b86900100000066dfb457e6852e4c6cc378bf (good)
+;; QUESTION SECTION:
+;udi.cl.                                IN      A
+
+;; AUTHORITY SECTION:
+udi.cl.                 3600    IN      NS      ns1.maxtel.cl.
+udi.cl.                 3600    IN      NS      secundario.nic.cl.
+
+;; ADDITIONAL SECTION:
+ns1.maxtel.cl.          3600    IN      A       209.14.251.10
+
+;; Query time: 39 msec
+;; SERVER: 190.124.27.10#53(a.nic.cl) (UDP)
+;; WHEN: Mon Sep 09 23:52:15 -03 2024
+;; MSG SIZE  rcvd: 137
+
+De esto notamos que existen dos NSs para este dominio, el primero teniendo una dirección IP asignada, la cual notemos es la misma que sale en la primera salida, por lo que pese a que en ese caso no se veía un nombre si se tenía en consideración la existencia de este NS, por lo que ahora utilizaremos ambos para realizar la consulta sobre este dominio:
+
+; <<>> DiG 9.18.24-0ubuntu5-Ubuntu <<>> udi.cl @ns1.maxtel.cl
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 14262
+;; flags: qr aa rd; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+;; WARNING: recursion requested but not available
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+;; QUESTION SECTION:
+;udi.cl.                                IN      A
+
+;; ANSWER SECTION:
+udi.cl.                 60      IN      A       209.14.251.10
+
+;; Query time: 10 msec
+;; SERVER: 209.14.251.10#53(ns1.maxtel.cl) (UDP)
+;; WHEN: Mon Sep 09 23:53:36 -03 2024
+;; MSG SIZE  rcvd: 51
+
+####################################################################################
+
+; <<>> DiG 9.18.24-0ubuntu5-Ubuntu <<>> udi.cl @secundario.nic.cl
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: REFUSED, id: 22662
+;; flags: qr rd; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+;; WARNING: recursion requested but not available
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+; COOKIE: bbce17c760ee7c2c0100000066dfb51eb584cdd7ef8575a0 (good)
+;; QUESTION SECTION:
+;udi.cl.                                IN      A
+
+;; Query time: 19 msec
+;; SERVER: 200.7.5.7#53(secundario.nic.cl) (UDP)
+;; WHEN: Mon Sep 09 23:55:25 -03 2024
+;; MSG SIZE  rcvd: 63
+
+Considerando el primer caso es posible notar que el propio servidor de nombre del dominio no muestra el segundo NS que si aparece al realizar la consulta en la zona padre, generando esta incoherencia en la cantidad de servidores de nombre disponibles. Adicionalmente a esto, se ve que al utilizar el NS "secundario.nic.cl" se genera el error "REFUSED", lo cual en este caso significaría que esto está hecho a propósito o fue un descuido no configurarlo para que no ocurriese.secundario.nic.cl
+

@@ -1,0 +1,123 @@
+- Actividad evaluada 3 (srcei.cl)
+Estudiante: Andrés Calderón Guardia
+
+Realizamos la consulta sobre "srcei.cl" usando el resolver default:
+
+; <<>> DiG 9.18.24-0ubuntu5-Ubuntu <<>> ns srcei.cl
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 47252
+;; flags: qr rd ra; QUERY: 1, ANSWER: 4, AUTHORITY: 0, ADDITIONAL: 3
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 512
+;; QUESTION SECTION:
+;srcei.cl.                      IN      NS
+
+;; ANSWER SECTION:
+srcei.cl.               28800   IN      NS      ns.srcei.cl.
+srcei.cl.               28800   IN      NS      ns.sed.srcei.cl.
+srcei.cl.               28800   IN      NS      secundario.nic.cl.
+srcei.cl.               28800   IN      NS      infoblox01.srcei.cl.
+
+;; ADDITIONAL SECTION:
+secundario.nic.cl.      13268   IN      A       200.7.5.7
+secundario.nic.cl.      15776   IN      AAAA    2001:1398:276:0:200:7:5:7
+
+;; Query time: 9 msec
+;; SERVER: 10.255.255.254#53(10.255.255.254) (UDP)
+;; WHEN: Mon Sep 09 23:16:47 -03 2024
+;; MSG SIZE  rcvd: 173
+
+De esto obtenemos cuatro NSs, de los cuales es posible notar que uno de ellos posee dos direcciones IP. Si ahora revisamos con cada uno se obtiene lo siguiente:
+
+; <<>> DiG 9.18.24-0ubuntu5-Ubuntu <<>> ns srcei.cl @secundario.nic.cl
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 46737
+;; flags: qr aa rd; QUERY: 1, ANSWER: 4, AUTHORITY: 0, ADDITIONAL: 5
+;; WARNING: recursion requested but not available
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+; COOKIE: 6ffd7e85aa4b88cf0100000066dfaf87e4684a6861a800fb (good)
+;; QUESTION SECTION:
+;srcei.cl.                      IN      NS
+
+;; ANSWER SECTION:
+srcei.cl.               28800   IN      NS      ns.sed.srcei.cl.
+srcei.cl.               28800   IN      NS      ns.srcei.cl.
+srcei.cl.               28800   IN      NS      infoblox01.srcei.cl.
+srcei.cl.               28800   IN      NS      secundario.nic.cl.
+
+;; ADDITIONAL SECTION:
+ns.sed.srcei.cl.        28800   IN      A       119.8.144.219
+ns.srcei.cl.            28800   IN      A       163.247.64.130
+infoblox01.srcei.cl.    28800   IN      A       163.247.64.130
+infoblox01.srcei.cl.    28800   IN      A       164.96.64.58
+
+;; Query time: 19 msec
+;; SERVER: 200.7.5.7#53(secundario.nic.cl) (UDP)
+;; WHEN: Mon Sep 09 23:31:33 -03 2024
+;; MSG SIZE  rcvd: 231
+
+##############################################################################
+
+; <<>> DiG 9.18.24-0ubuntu5-Ubuntu <<>> ns srcei.cl @ns.srcei.cl
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 25369
+;; flags: qr aa rd; QUERY: 1, ANSWER: 4, AUTHORITY: 0, ADDITIONAL: 1
+;; WARNING: recursion requested but not available
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1220
+; COOKIE: 086f3a815d56022c364638df66dfafceef96c34e106f004f (good)
+;; QUESTION SECTION:
+;srcei.cl.                      IN      NS
+
+;; ANSWER SECTION:
+srcei.cl.               28800   IN      NS      ns.sed.srcei.cl.
+srcei.cl.               28800   IN      NS      secundario.nic.cl.
+srcei.cl.               28800   IN      NS      ns.srcei.cl.
+srcei.cl.               28800   IN      NS      infoblox01.srcei.cl.
+
+;; Query time: 9 msec
+;; SERVER: 163.247.64.130#53(ns.srcei.cl) (UDP)
+;; WHEN: Mon Sep 09 23:32:44 -03 2024
+;; MSG SIZE  rcvd: 157
+
+##############################################################################
+
+; <<>> DiG 9.18.24-0ubuntu5-Ubuntu <<>> ns srcei.cl @infoblox01.srcei.cl
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 46736
+;; flags: qr aa rd; QUERY: 1, ANSWER: 4, AUTHORITY: 0, ADDITIONAL: 1
+;; WARNING: recursion requested but not available
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1220
+; COOKIE: 77355fc1c926431b2cd8b4fd66dfb01e4c62b897660b0faa (good)
+;; QUESTION SECTION:
+;srcei.cl.                      IN      NS
+
+;; ANSWER SECTION:
+srcei.cl.               28800   IN      NS      secundario.nic.cl.
+srcei.cl.               28800   IN      NS      infoblox01.srcei.cl.
+srcei.cl.               28800   IN      NS      ns.srcei.cl.
+srcei.cl.               28800   IN      NS      ns.sed.srcei.cl.
+
+;; Query time: 0 msec
+;; SERVER: 163.247.64.130#53(infoblox01.srcei.cl) (UDP)
+;; WHEN: Mon Sep 09 23:34:05 -03 2024
+;; MSG SIZE  rcvd: 157
+
+##############################################################################
+
+; <<>> DiG 9.18.24-0ubuntu5-Ubuntu <<>> ns srcei.cl @ns.sed.srcei.cl
+;; global options: +cmd
+;; no servers could be reached
+
+De estos cuatro outputs, se observa que los primeros tres no presentan problemas, son consistentes entre sí, pero el problema se encuentra en el cuarto ya que en este no se logró conectar con el NS "ns.sed.srcei.cl", lo cual podría ser causado por varios temas, tales como que el servidor ya no se encuentra habilitado o no se ha actualizado la información del mismo.
+
