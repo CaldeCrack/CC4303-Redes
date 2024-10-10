@@ -1,6 +1,9 @@
 #!/usr/bin/python3
 # Selective-Repeat simulation
-import jsockets, sys, threading, DoubleLinkedQueue as dlq
+import jsockets, sys, threading
+
+
+WIN_SZ_LIMIT = 32767
 
 if len(sys.argv) != 5:
 	print(f"Use: {sys.argv[0]} pack_sz win_sz host port")
@@ -11,7 +14,7 @@ win_sz: int = int(sys.argv[2])
 host: str = sys.argv[3]
 port: str = sys.argv[4]
 
-if not (1 <= sys.argv[2] <= 32767):
+if not (1 <= sys.argv[2] <= WIN_SZ_LIMIT):
 	print(f"win_sz should be between 1 and 32767 (given {win_sz})")
 	sys.exit(1)
 
@@ -23,22 +26,29 @@ def sequence_number():
 		yield byte_number
 		num = (num + 1) % limit
 
+def advance_window(window: list) -> None:
+	while window[0][1]:
+		del window[0]
+		window.append(((window[-1][0] + 1) % WIN_SZ_LIMIT, False))
+
 # receptor
 def Rdr(s, pack_sz, win_sz):
-	win_min: int = 1
-	win_max: int = win_sz
-	cola = dlq.DoubleLinkedQueue(win_sz)
+	win_min: int = 0
+	win_max: int = win_sz - 1
+	# window = DLQ(win_sz)
+	window: list = [(i, False) for i in range(win_sz)]
 
 	while True:
 		try:
 			data = s.recv(pack_sz)
 			recv_sqn: int = int.from_bytes(data[0:2], "big")
+			index: int = recv_sqn - win_min
+			window[index] = (recv_sqn, True)
 
-			if not (win_min <= recv_sqn <= win_max):
-				pass
 			if recv_sqn == win_min:
 				win_min = recv_sqn
 				win_max = recv_sqn + win_max
+				advance_window(window)
 
 			if len(data) == 2:
 				break
