@@ -26,16 +26,16 @@ def sequence_number():
 		yield byte_number
 		num = (num + 1) % limit
 
-def advance_window(window: list) -> None:
+def advance_window(window: list) -> int:
 	while window[0][1]:
 		del window[0]
 		window.append(((window[-1][0] + 1) % WIN_SZ_LIMIT, False))
+	#! return pendiente
 
 # receptor
 def Rdr(s, pack_sz, win_sz):
 	win_min: int = 0
 	win_max: int = win_sz - 1
-	# window = DLQ(win_sz)
 	window: list = [(i, False) for i in range(win_sz)]
 
 	while True:
@@ -43,16 +43,18 @@ def Rdr(s, pack_sz, win_sz):
 			data = s.recv(pack_sz)
 			recv_sqn: int = int.from_bytes(data[0:2], "big")
 			index: int = recv_sqn - win_min
-			window[index] = (recv_sqn, True)
+
+			if (win_min <= recv_sqn <= win_max):
+				window[index] = (recv_sqn, True)
 
 			if recv_sqn == win_min:
-				win_min = recv_sqn
-				win_max = recv_sqn + win_max
-				advance_window(window)
+				win_min = advance_window(window)
+				win_max = win_min + win_sz
 
+
+			sys.stdout.buffer.write(data)
 			if len(data) == 2:
 				break
-			sys.stdout.buffer.write(data)
 		except:
 			break
 
