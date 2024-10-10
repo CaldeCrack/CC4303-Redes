@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 # Echo server UDP program - version of server_echo_udp.c, mono-cliente
-
-import jsockets
+import jsockets, sys
 
 s = jsockets.socket_udp_bind(1818)
 if s is None:
