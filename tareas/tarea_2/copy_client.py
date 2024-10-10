@@ -27,7 +27,7 @@ def sequence_number():
 def Rdr(s, pack_sz, win_sz):
 	win_min: int = 1
 	win_max: int = win_sz
-	cola = dlq.DoubleLinkedQueue
+	cola = dlq.DoubleLinkedQueue(win_sz)
 
 	while True:
 		try:
@@ -40,7 +40,7 @@ def Rdr(s, pack_sz, win_sz):
 				win_min = recv_sqn
 				win_max = recv_sqn + win_max
 
-			if not data:
+			if len(data) == 2:
 				break
 			sys.stdout.buffer.write(data)
 		except:
@@ -53,14 +53,15 @@ if s is None:
 
 newthread = threading.Thread(target=Rdr, args=(s, pack_sz, win_sz))
 newthread.start()
+sqn = sequence_number()
 
 # emisor
 while True:
-	byte_s = sys.stdin.buffer.read(pack_sz)
+	byte_s = sys.stdin.buffer.read(pack_sz - 2)
 	if not byte_s:
 		s.shutdown(jsockets.socket.SHUT_WR)
 		break
-	s.send(byte_s)
+	s.send(next(sqn) + byte_s)
 
 newthread.join()
 s.close()
