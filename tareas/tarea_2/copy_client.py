@@ -36,9 +36,18 @@ class Packet:
 	def received(self) -> None:
 		self.ack = True
 
+	def __repr__(self):
+		return self.__str__()
 
-recv_window: list[Packet] = [Packet(i) for i in range(win_sz)]
-sndr_window: list[Packet] = recv_window
+	def __str__(self) -> str:
+		return f"sqn = {self.int_sqn} | ack = {self.ack} | data = {self.data}"
+
+recv_window: list[Packet] = []
+sndr_window: list[Packet] = []
+for i in range(win_sz):
+	packet: Packet = Packet(i)
+	recv_window.append(packet)
+	sndr_window.append(packet)
 sndr_min: int = 0
 sndr_max: int = win_sz - 1
 
@@ -50,12 +59,12 @@ def sequence_number():
 		yield byte_number
 		num = (num + 1) % limit
 
-def advance_window(win: list[Packet], q=None) -> int:
+def advance_window(win: list[Packet], q: PriorityQueue | None = None) -> int:
 	while win[0].ack:
-		if q and peek_packet(q).int_sqn == win[0].int_sqn:
+		if q and not q.empty() and peek_packet(q).int_sqn == win[0].int_sqn:
 			q.get()
-		# else:
-			#! sys.stdout.buffer.write(win[0][2])
+		else:
+			sys.stdout.buffer.write(win[0].data)
 		del win[0]
 		next_index: int = (win[-1].int_sqn + 1) % WIN_SZ_LIMIT
 		win.append(Packet(next_index))
@@ -76,8 +85,8 @@ def Rdr(s, pack_sz, win_sz):
 			if (recv_min <= recv_sqn <= recv_max):
 				recv_window[recv_sqn - recv_min].received()
 				recv_window[recv_sqn - recv_min].data = data
-				sndr_window[recv_sqn - sndr_min].received()
-				sndr_window[recv_sqn - sndr_min].data = data
+				# sndr_window[recv_sqn - sndr_min].received()
+				# sndr_window[recv_sqn - sndr_min].data = data
 
 			if recv_sqn == recv_min:
 				recv_min = advance_window(recv_window)
@@ -105,7 +114,7 @@ def peek_packet(pq) -> Packet:
 	return pq.queue[0][1]
 
 timeout: float = 0.5
-sqn: bytes = sequence_number()
+sqn = sequence_number()
 timeouts: PriorityQueue = PriorityQueue() # time, packet
 n: bytes = next(sqn)
 
@@ -132,7 +141,7 @@ while True:
 		if (packet := sndr_window[index]).int_sqn < sndr_min:
 			timeouts.get()
 		elif not packet.ack: # retransmitir paquete
-			s.send(packet.sqn + packet.data) #! error
+			s.send(packet.sqn + packet.data)
 			timeouts.get()
 			delta = timedelta(seconds=timeout)
 			expire = (datetime.now() + delta, packet)
@@ -140,7 +149,6 @@ while True:
 		elif sndr_min == peek_packet(timeouts).int_sqn:
 			sndr_min = advance_window(sndr_window, timeouts)
 			sndr_max = sndr_min + win_sz - 1
-			# print(sndr_window)
 
 	if timeouts.empty():
 		break
