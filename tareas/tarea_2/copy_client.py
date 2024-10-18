@@ -10,8 +10,8 @@ if len(sys.argv) != 5:
 	print(f"Use: {sys.argv[0]} pack_sz win_sz host port")
 	sys.exit(1)
 
-WIN_SZ_LIMIT = 32767
-# MUTEX = threading.Lock()
+WIN_SZ_LIMIT: int = 32767
+MUTEX: Lock = Lock()
 pack_sz: int = int(sys.argv[1])
 win_sz: int = int(sys.argv[2])
 host: str = sys.argv[3]
@@ -40,7 +40,7 @@ class Packet:
 		return self.__str__()
 
 	def __str__(self) -> str:
-		return f"sqn = {self.int_sqn} | ack = {self.ack} | data = {self.data}"
+		return f"sqn={self.int_sqn} | ack={self.ack} | data={self.data[0:5] if self.data else None}..."
 
 recv_window: list[Packet] = []
 sndr_window: list[Packet] = []
@@ -136,7 +136,8 @@ while True:
 	# manejar timeouts
 	if datetime.now() >= peek_time(timeouts):
 		index: int = peek_packet(timeouts).int_sqn - sndr_min
-		# print(f"primer sqn timeouts={peek_packet(timeouts).int_sqn:2} | {sndr_min=} | {index=}")
+		# print(f"primer sqn timeouts={peek_packet(timeouts).int_sqn} | {sndr_min=} | {index=}")
+		# print(timeouts.queue, "\n")
 
 		if (packet := sndr_window[index]).int_sqn < sndr_min:
 			timeouts.get()
@@ -150,7 +151,8 @@ while True:
 			sndr_min = advance_window(sndr_window, timeouts)
 			sndr_max = sndr_min + win_sz - 1
 
-	if timeouts.empty():
+	if timeouts.empty() and not data:
+		print("sender finished")
 		break
 
 receiver.join()
