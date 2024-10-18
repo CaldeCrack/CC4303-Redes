@@ -34,7 +34,29 @@ class Packet:
 		self.ack: bool = ack
 
 	def received(self) -> None:
-		self.ack = True
+		MUTEX.acquire()
+		self._ack = True
+		MUTEX.release()
+
+	@property
+	def data(self) -> bytes:
+		return self._data
+
+	@data.setter
+	def data(self, value: bytes) -> None:
+		MUTEX.acquire()
+		self._data = value
+		MUTEX.release()
+
+	@property
+	def ack(self) -> bytes:
+		return self._ack
+
+	@ack.setter
+	def ack(self, value: bool) -> None:
+		MUTEX.acquire()
+		self._ack = value
+		MUTEX.release()
 
 	def __repr__(self):
 		return self.__str__()
@@ -142,8 +164,9 @@ while True:
 
 		if (packet := peek_packet(timeouts)).int_sqn < sndr_min or packet.int_sqn > sndr_max or packet.ack:
 			timeouts.get()
-			sndr_min = advance_window(sndr_window, True)
-			sndr_max = sndr_min + win_sz - 1
+			if sndr_window[0].ack:
+				sndr_min = advance_window(sndr_window, True)
+				sndr_max = sndr_min + win_sz - 1
 		else: # retransmitir paquete
 			sndr_errors += 1
 			s.send(packet.sqn + packet.data)
