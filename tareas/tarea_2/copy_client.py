@@ -51,6 +51,9 @@ for i in range(win_sz):
 sndr_min: int = 0
 sndr_max: int = win_sz - 1
 
+sndr_errors: int = 0
+recv_errors: int = 0
+
 def sequence_number():
 	num: int = 0
 	limit: int = 65535
@@ -59,11 +62,9 @@ def sequence_number():
 		yield byte_number
 		num = (num + 1) % limit
 
-def advance_window(win: list[Packet], q: PriorityQueue | None = None) -> int:
+def advance_window(win: list[Packet], sndr: bool = False) -> int:
 	while win[0].ack:
-		if q and not q.empty() and peek_packet(q).int_sqn == win[0].int_sqn:
-			q.get()
-		else:
+		if sndr:
 			sys.stdout.buffer.write(win[0].data)
 		del win[0]
 		next_index: int = (win[-1].int_sqn + 1) % WIN_SZ_LIMIT
@@ -72,7 +73,8 @@ def advance_window(win: list[Packet], q: PriorityQueue | None = None) -> int:
 
 
 # ########### RECEPTOR ###########
-def Rdr(s, pack_sz, win_sz):
+def Rdr(s, pack_sz: int, win_sz: int):
+	global recv_errors
 	recv_min: int = 0
 	recv_max: int = win_sz - 1
 
@@ -85,8 +87,8 @@ def Rdr(s, pack_sz, win_sz):
 			if (recv_min <= recv_sqn <= recv_max):
 				recv_window[recv_sqn - recv_min].received()
 				recv_window[recv_sqn - recv_min].data = data
-				# sndr_window[recv_sqn - sndr_min].received()
-				# sndr_window[recv_sqn - sndr_min].data = data
+			else:
+				recv_errors += 1
 
 			if recv_sqn == recv_min:
 				recv_min = advance_window(recv_window)
@@ -96,6 +98,7 @@ def Rdr(s, pack_sz, win_sz):
 				break
 		except:
 			break
+	print("Receiver finished")
 
 s = jsockets.socket_udp_connect(host, port)
 if s is None:
@@ -113,47 +116,49 @@ def peek_time(pq) -> datetime:
 def peek_packet(pq) -> Packet:
 	return pq.queue[0][1]
 
+timeouts: PriorityQueue = PriorityQueue() # time, packet
 timeout: float = 0.5
 sqn = sequence_number()
-timeouts: PriorityQueue = PriorityQueue() # time, packet
 n: bytes = next(sqn)
+data: bytes = b'\x11'
 
 while True:
-	data: bytes = sys.stdin.buffer.read(pack_sz - 2)
 	int_n: int = int.from_bytes(n, "big")
+	if int_n <= sndr_max and data:
+		data = sys.stdin.buffer.read(pack_sz - 2)
 
-	# envío de paquetes
-	if sndr_min <= int_n <= sndr_max and data:
-		s.send(n + data)
-		sndr_window[int_n - sndr_min].data = data
-		delta: timedelta = timedelta(seconds=timeout)
-		expire = (datetime.now() + delta, sndr_window[int_n - sndr_min])
-		timeouts.put(expire)
-		n = next(sqn)
-	elif not data:
-		s.send(n)
+		# envío de paquetes
+		if sndr_min <= int_n <= sndr_max and data:
+			sndr_window[int_n - sndr_min].data = data
+			delta: timedelta = timedelta(seconds=timeout)
+			expire = (datetime.now() + delta, sndr_window[int_n - sndr_min])
+			timeouts.put(expire)
+			s.send(n + data)
+			n = next(sqn)
 
 	# manejar timeouts
 	if datetime.now() >= peek_time(timeouts):
 		index: int = peek_packet(timeouts).int_sqn - sndr_min
-		# print(f"primer sqn timeouts={peek_packet(timeouts).int_sqn} | {sndr_min=} | {index=}")
-		# print(timeouts.queue, "\n")
 
-		if (packet := sndr_window[index]).int_sqn < sndr_min:
+		if (packet := peek_packet(timeouts)).int_sqn < sndr_min or packet.int_sqn > sndr_max or packet.ack:
 			timeouts.get()
-		elif not packet.ack: # retransmitir paquete
+			sndr_min = advance_window(sndr_window, True)
+			sndr_max = sndr_min + win_sz - 1
+		else: # retransmitir paquete
+			sndr_errors += 1
 			s.send(packet.sqn + packet.data)
 			timeouts.get()
 			delta = timedelta(seconds=timeout)
 			expire = (datetime.now() + delta, packet)
 			timeouts.put(expire)
-		elif sndr_min == peek_packet(timeouts).int_sqn:
-			sndr_min = advance_window(sndr_window, timeouts)
-			sndr_max = sndr_min + win_sz - 1
 
 	if timeouts.empty() and not data:
-		print("sender finished")
+		s.send(n)
+		print("\nSender finished")
 		break
+
+print(f"{sndr_errors = }")
+print(f"{recv_errors = }")
 
 receiver.join()
 s.close()
