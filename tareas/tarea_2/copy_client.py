@@ -35,7 +35,7 @@ class Packet:
 
 	def received(self) -> None:
 		MUTEX.acquire()
-		self._ack = True
+		self.ack = True
 		MUTEX.release()
 
 	@property
@@ -46,16 +46,6 @@ class Packet:
 	def data(self, value: bytes) -> None:
 		MUTEX.acquire()
 		self._data = value
-		MUTEX.release()
-
-	@property
-	def ack(self) -> bytes:
-		return self._ack
-
-	@ack.setter
-	def ack(self, value: bool) -> None:
-		MUTEX.acquire()
-		self._ack = value
 		MUTEX.release()
 
 	def __repr__(self):
@@ -89,10 +79,12 @@ def advance_window(win: list[Packet], sndr: bool = False) -> int:
 		if sndr:
 			sys.stdout.buffer.write(win[0].data)
 		del win[0]
-		next_index: int = (win[-1].int_sqn + 1) % WIN_SZ_LIMIT
-		win.append(Packet(next_index))
+		if not sndr:
+			next_index: int = (win[-1].int_sqn + 1) % WIN_SZ_LIMIT
+			packet: Packet = Packet(next_index)
+			recv_window.append(packet)
+			sndr_window.append(packet)
 	return win[0].int_sqn
-
 
 # ########### RECEPTOR ###########
 def Rdr(s, pack_sz: int, win_sz: int):
@@ -109,12 +101,10 @@ def Rdr(s, pack_sz: int, win_sz: int):
 			if (recv_min <= recv_sqn <= recv_max):
 				recv_window[recv_sqn - recv_min].received()
 				recv_window[recv_sqn - recv_min].data = data
-			else:
-				recv_errors += 1
-
-			if recv_sqn == recv_min:
 				recv_min = advance_window(recv_window)
 				recv_max = recv_min + win_sz - 1
+			else:
+				recv_errors += 1
 
 			if not data:
 				break
@@ -146,11 +136,11 @@ data: bytes = b'\x11'
 
 while True:
 	int_n: int = int.from_bytes(n, "big")
-	if int_n <= sndr_max and data:
+	if sndr_min <= int_n <= sndr_max and data:
 		data = sys.stdin.buffer.read(pack_sz - 2)
 
 		# envío de paquetes
-		if sndr_min <= int_n <= sndr_max and data:
+		if data:
 			sndr_window[int_n - sndr_min].data = data
 			delta: timedelta = timedelta(seconds=timeout)
 			expire = (datetime.now() + delta, sndr_window[int_n - sndr_min])
@@ -164,9 +154,8 @@ while True:
 
 		if (packet := peek_packet(timeouts)).int_sqn < sndr_min or packet.int_sqn > sndr_max or packet.ack:
 			timeouts.get()
-			if sndr_window[0].ack:
-				sndr_min = advance_window(sndr_window, True)
-				sndr_max = sndr_min + win_sz - 1
+			sndr_min = advance_window(sndr_window, True)
+			sndr_max = sndr_min + win_sz - 1
 		else: # retransmitir paquete
 			sndr_errors += 1
 			s.send(packet.sqn + packet.data)
