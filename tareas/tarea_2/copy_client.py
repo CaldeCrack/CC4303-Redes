@@ -86,31 +86,39 @@ def advance_window(win: list[Packet], sndr: bool = False) -> int:
 			sndr_window.append(packet)
 	return win[0].int_sqn
 
+
 # ########### RECEPTOR ###########
 def Rdr(s, pack_sz: int, win_sz: int):
 	global recv_errors
+	latest: int = -1
 	recv_min: int = 0
 	recv_max: int = win_sz - 1
 
 	while True:
-		try:
-			rec: bytes = s.recv(pack_sz)
-			recv_sqn: int = int.from_bytes(rec[0:2], "big")
-			data: bytes = rec[2:]
+		rec: bytes = s.recv(pack_sz)
+		recv_sqn: int = int.from_bytes(rec[0:2], "big")
+		data: bytes = rec[2:]
 
-			if (recv_min <= recv_sqn <= recv_max):
-				recv_window[recv_sqn - recv_min].received()
-				recv_window[recv_sqn - recv_min].data = data
-				recv_min = advance_window(recv_window)
-				recv_max = recv_min + win_sz - 1
-			else:
+		if (recv_min <= recv_sqn <= recv_max):
+			if recv_window[recv_sqn - recv_min].ack: # paquete reentregado
 				recv_errors += 1
+			elif recv_sqn != latest + 1: # paquete en desorden
+				latest = recv_sqn
+				recv_errors += 1
+			recv_window[recv_sqn - recv_min].received()
+			recv_window[recv_sqn - recv_min].data = data
+			recv_min = advance_window(recv_window)
+			recv_max = recv_min + win_sz - 1
+		else: # paquete fuera de la ventana de recepción
+			recv_errors += 1
 
-			if not data:
-				break
-		except:
+		latest = max(latest, recv_sqn)
+
+		if not data:
 			break
-	print("Receiver finished")
+
+	print("\n- Receiver finished")
+	print(f"{recv_errors = }")
 
 s = jsockets.socket_udp_connect(host, port)
 if s is None:
@@ -165,12 +173,10 @@ while True:
 			timeouts.put(expire)
 
 	if timeouts.empty() and not data:
+		print("\n- Sender finished")
+		print(f"{sndr_errors = }")
 		s.send(n)
-		print("\nSender finished")
 		break
-
-print(f"{sndr_errors = }")
-print(f"{recv_errors = }")
 
 receiver.join()
 s.close()
