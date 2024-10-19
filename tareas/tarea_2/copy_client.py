@@ -23,19 +23,37 @@ if not (1 <= win_sz <= WIN_SZ_LIMIT):
 
 
 class Packet:
-	def __init__(self, sqn: bytes | int, data: bytes | None = None, ack: bool = False) -> None:
+	def __init__(self, sqn: bytes | int) -> None:
 		if type(sqn) == int:
 			self.sqn: bytes = sqn.to_bytes(2, "big")
 			self.int_sqn: int = sqn
 		else:
 			self.sqn: bytes = sqn
 			self.int_sqn: int = int.from_bytes(sqn, "big")
-		self.data: bytes | None = data
-		self.ack: bool = ack
+		self.data: bytes | None = None
+		self.ack: bool = False
+		self.sndr_time: datetime | None = None
+		self.recv_time: datetime | None = None
+		self.retransmission: bool = False
 
 	def received(self) -> None:
 		MUTEX.acquire()
 		self.ack = True
+		MUTEX.release()
+
+	def sent_time(self) -> None:
+		MUTEX.acquire()
+		self.sndr_time = datetime.now()
+		MUTEX.release()
+
+	def received_time(self) -> None:
+		MUTEX.acquire()
+		self.recv_time = datetime.now()
+		MUTEX.release()
+
+	def retransmitted(self) -> None:
+		MUTEX.acquire()
+		self.retransmission = True
 		MUTEX.release()
 
 	@property
@@ -48,11 +66,9 @@ class Packet:
 		self._data = value
 		MUTEX.release()
 
-	def __repr__(self):
-		return self.__str__()
+	def __lt__(self, other) -> bool:
+		return self.int_sqn < other.int_sqn
 
-	def __str__(self) -> str:
-		return f"sqn={self.int_sqn} | ack={self.ack} | data={self.data[0:5] if self.data else None}..."
 
 recv_window: list[Packet] = []
 sndr_window: list[Packet] = []
@@ -62,9 +78,9 @@ for i in range(win_sz):
 	sndr_window.append(packet)
 sndr_min: int = 0
 sndr_max: int = win_sz - 1
-
 sndr_errors: int = 0
 recv_errors: int = 0
+timeout: float = 0.5
 
 def sequence_number():
 	num: int = 0
@@ -75,17 +91,19 @@ def sequence_number():
 		num = (num + 1) % limit
 
 def advance_window(win: list[Packet], sndr: bool = False) -> int:
+	global timeout
 	while win[0].ack:
 		if sndr:
 			sys.stdout.buffer.write(win[0].data)
+			# en el mismo momento en que se recibe el paquete se obtiene el 'ACK' dada la memoria compartida
+			if not win[0].retransmission:
+				timeout = 3.0 * ((win[0].recv_time - win[0].sndr_time) / timedelta(milliseconds=1)) / 1000.0
 		del win[0]
 		if not sndr:
-			next_index: int = (win[-1].int_sqn + 1) % WIN_SZ_LIMIT
-			packet: Packet = Packet(next_index)
+			packet: Packet = Packet((win[-1].int_sqn + 1) % WIN_SZ_LIMIT)
 			recv_window.append(packet)
 			sndr_window.append(packet)
 	return win[0].int_sqn
-
 
 # ########### RECEPTOR ###########
 def Rdr(s, pack_sz: int, win_sz: int):
@@ -107,13 +125,13 @@ def Rdr(s, pack_sz: int, win_sz: int):
 				recv_errors += 1
 			recv_window[recv_sqn - recv_min].received()
 			recv_window[recv_sqn - recv_min].data = data
+			recv_window[recv_sqn - recv_min].received_time()
 			recv_min = advance_window(recv_window)
 			recv_max = recv_min + win_sz - 1
 		else: # paquete fuera de la ventana de recepción
 			recv_errors += 1
 
 		latest = max(latest, recv_sqn)
-
 		if not data:
 			break
 
@@ -124,10 +142,8 @@ s = jsockets.socket_udp_connect(host, port)
 if s is None:
 	print('Could not open socket')
 	sys.exit(1)
-
 receiver: Thread = Thread(target=Rdr, args=(s, pack_sz, win_sz))
 receiver.start()
-
 
 # ########### EMISOR ###########
 def peek_time(pq) -> datetime:
@@ -137,7 +153,6 @@ def peek_packet(pq) -> Packet:
 	return pq.queue[0][1]
 
 timeouts: PriorityQueue = PriorityQueue() # time, packet
-timeout: float = 0.5
 sqn = sequence_number()
 n: bytes = next(sqn)
 data: bytes = b'\x11'
@@ -150,6 +165,7 @@ while True:
 		# envío de paquetes
 		if data:
 			sndr_window[int_n - sndr_min].data = data
+			sndr_window[int_n - sndr_min].sent_time()
 			delta: timedelta = timedelta(seconds=timeout)
 			expire = (datetime.now() + delta, sndr_window[int_n - sndr_min])
 			timeouts.put(expire)
@@ -158,19 +174,20 @@ while True:
 
 	# manejar timeouts
 	if datetime.now() >= peek_time(timeouts):
-		index: int = peek_packet(timeouts).int_sqn - sndr_min
+		index: int = (packet := peek_packet(timeouts)).int_sqn - sndr_min
 
-		if (packet := peek_packet(timeouts)).int_sqn < sndr_min or packet.int_sqn > sndr_max or packet.ack:
+		if packet.ack or packet.int_sqn < sndr_min or packet.int_sqn > sndr_max:
 			timeouts.get()
 			sndr_min = advance_window(sndr_window, True)
 			sndr_max = sndr_min + win_sz - 1
 		else: # retransmitir paquete
-			sndr_errors += 1
+			packet.retransmitted()
 			s.send(packet.sqn + packet.data)
 			timeouts.get()
 			delta = timedelta(seconds=timeout)
 			expire = (datetime.now() + delta, packet)
 			timeouts.put(expire)
+			sndr_errors += 1
 
 	if timeouts.empty() and not data:
 		print("\n- Sender finished")
