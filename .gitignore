@@ -563,3 +563,4 @@ FodyWeavers.xsd
 
 files
 result.bin
+*out.bin
