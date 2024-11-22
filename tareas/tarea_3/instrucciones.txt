@@ -1,0 +1,18 @@
+- Instrucciones de ejecución
+Estudiante: Andrés Calderón Guardia
+
+Primero notar que estoy utilizando el cliente que desarrollé en la T2, con Selective Repeat, para el cual realicé una modificación porque Scapy se demora mucho en probar todos los números de secuencia miles de veces, a lo cual realicé un time.sleep(5) para que el pirata sea capaz de realizar la inyección antes de que termine el cliente, esto implica que hay que empezar a ejecutar el pirata antes de que pasen 5 segundos del inicio de la ejecución del cliente. En la práctica el pirata serviría sin problemas si no fuera por esta limitación en la velocidad de su ejecución. Un último detalle a tener en cuenta es que el cliente tira error cuando el pirata inyecta exitosamente un paquete falso, considerando que esta tarea solo se centra en realizar la inyección no consideré necesario arreglarlo.
+
+El sistema operativo utilizado es Linux, en particular Ubuntu noble 24.04 y se requiere de instalar Python y Scapy usando apt para poder ejecutar esta tarea.
+
+Para lograr la inyección seguir los siguientes pasos:
+1. Ejecutar:
+	./copy_client.py 15 1000 anakena.dcc.uchile.cl 1818 < <ruta a archivo grande> > out
+
+2. Ejecutar antes de que pasen 5 segundos del comando anterior en otra terminal:
+	sudo ./pirata.py anakena.dcc.uchile.cl 1818 XX.XX.XX.XX NNNN
+Con XX.XX.XX.XX y NNNN la IP y el puerto entregado por el comando anterior.
+
+3. No es necesario esperar a que terminen ambas ejecuciones, si el cliente tiró error entonces funcionó la inyección, en cuyo caso ejecutar el siguiente comando para verificar:
+	grep "hackeado" out
+

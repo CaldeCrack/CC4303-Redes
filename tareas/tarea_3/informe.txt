@@ -1,0 +1,15 @@
+- Tarea 2
+Estudiante: Andrés Calderón Guardia
+
+1.
+Una extensión que haría resistente a este tipo de ataques el protocolo UDP sería implementar un MAC para la conexión entre cliente y servidor, de modo que al inicio de la comunicación sea posible generar esta clave y que sirva como método de autentificación entre ambas partes. Es posible lograr la creación de dicha clave entre dos extremos mediante algoritmos como el logaritmo discreto por lo que es una solución realista.
+
+2.
+En el mundo real las conexiones TCP utilizan mayores valores de números de secuencia (2^32), además de que por el 3-way handshake process se utilizan distintos números de secuencia en cada extremo, que además son inicialmente aleatorios, de modo que la cantidad de posibles combinaciones que hay en una conexión es de 2^32*2^32 = 2^33, lo cual es infactible de iterar por sobre todos estos casos, por lo que este protocolo es mucho más seguro respecto al UDP común contra este tipo de ataques.
+
+3.
+No se podría dado que Scapy necesita la IP y el puerto del cliente, lo cual es un dato del que si disponemos al estar utilizando la misma maquina, por lo que para poder realizar este mismo procedimiento se tendría que conocer estos valores de antemano.
+
+4.
+Para el caso particular que se da con la implementación de mi cliente, ocurre que no se sigue escribiendo el archivo tras la inyección dado que el cliente obtiene un error al existir dicha anomalía.
+
