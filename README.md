@@ -1,5 +1,5 @@
 # [CC4303] Redes (Primavera 2024)
-Resolución de las tareas y actividades del ramo.
+Resolución de las tareas, actividades y controles del ramo.
 
 ## Actividades
 
